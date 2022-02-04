@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 
 export default function LoginPage() {
+  let navigate = useNavigate();
   const [login, setLogin] = useState({
     email: "",
     password: ""
@@ -38,6 +40,7 @@ export default function LoginPage() {
         throw new Error(decodedResponse.message);
       } else if(decodedResponse.status === 200) {
         Swal.fire('Login Successful');
+        navigate("/dashboard");
       }
     } catch (error) {
       console.warn(error.message)

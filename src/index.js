@@ -1,12 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import LoginPage from "./Routes/LoginPage";
+import Dashboard from "./Routes/Dashboard";
+import StocksPage from "./Routes/StocksPage";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="dashboard" element={<Dashboard />}>
+            <Route path="stockspage" element={<StocksPage />} />
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
