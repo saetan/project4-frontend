@@ -61,7 +61,7 @@ export default function AddStockForms(props) {
 
       const decodedResponse = await response.json();
 
-      if (response.status == 200) {
+      if (response.status === 200) {
         Swal.fire("Add Stock Successful Successful");
         setTriggerRefresh(!triggerRefresh);
         //refresh the form
@@ -81,17 +81,17 @@ export default function AddStockForms(props) {
 
   return (
     <>
-      <div className="w-full max-w flex justify-center items-center h-screen">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
+      <div className="w-full max-w flex justify-center items-center h-full">
+        <form className="bg-white shadow-md rounded-lg px-32 pt-24 pb-32 mb-16">
+          <div class="mb-16">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-2xl font-bold mb-8"
               for="stockName"
             >
               Stock Name
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="text"
               type="text"
               placeholder="Stock Name"
@@ -99,15 +99,15 @@ export default function AddStockForms(props) {
               onChange={handleNameChange}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-16">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-2xl font-bold mb-8"
               for="quantity"
             >
               Stock Quantity
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
               value={stock.quantity}
               type="number"
               onChange={handleQuantityChange}
@@ -115,18 +115,18 @@ export default function AddStockForms(props) {
               type="number"
               placeholder="00.00"
             />
-            <p className="text-red-500 text-xs italic">Invalid Format.</p>
+            <p className="text-red-500 text-2xl italic">Invalid Format.</p>
           </div>
 
-          <div class="mb-4">
+          <div class="mb-16">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-2xl font-bold mb-8"
               for="price"
             >
               Price
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="price"
               type="number"
               placeholder="$00.00"
@@ -139,7 +139,7 @@ export default function AddStockForms(props) {
             <button
               disabled={isDisabled}
               onClick={handleSubmit}
-              className="inline-block align-baseline font-bold text-sm text-atoll hover:text-lightseagreen"
+              className="inline-block align-baseline font-bold text-2xl text-atoll hover:text-lightseagreen"
             >
               Submit
             </button>

@@ -47,9 +47,9 @@ export default function StocksPage({ triggerRefresh }) {
   };
 
   return (
-    <div className="flex justify-center items-center font-bold">
+    <div className="flex justify-center items-center font-bold text-2xl">
       {stockList.length ? (
-        <table className="table-fixed bg-azure border-collapse border border-blackpearl">
+        <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
           <thead className="bg-lightseagreen">
             <tr className="text-azure">
               <th className="border border-blackpearl">Name</th>
