@@ -7,19 +7,27 @@ import reportWebVitals from "./reportWebVitals";
 import LoginPage from "./Routes/LoginPage";
 import Dashboard from "./Routes/Dashboard";
 import StocksPage from "./Routes/StocksPage";
+import LogoutPage from "./Routes/LogoutPage";
+import UsersPage from "./Routes/UsersPage";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="login" element={<LoginPage />} />
-          <Route path="dashboard" element={<Dashboard />}>
-            <Route path="stockspage" element={<StocksPage />} />
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="login" element={<LoginPage />} />
+            <Route path="logout" element={<LogoutPage />} />
+            <Route path="dashboard" element={<Dashboard />}>
+              <Route path="stockspage" element={<StocksPage />} />
+              <Route path="userspage" element={<UsersPage />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

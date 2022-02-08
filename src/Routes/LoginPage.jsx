@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { toggleLoginState, updateRole } from "../redux/stateSlice";
+import { useDispatch } from "react-redux";
 
 export default function LoginPage() {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
   const [login, setLogin] = useState({
     email: "",
     password: "",
@@ -44,6 +47,8 @@ export default function LoginPage() {
         throw new Error(decodedResponse.message);
       } else if (decodedResponse.status === 200) {
         Swal.fire("Login Successful");
+        dispatch(toggleLoginState({ isLoggedIn: true }));
+        dispatch(updateRole({ role: decodedResponse.role }));
         navigate("/dashboard");
       }
     } catch (error) {
