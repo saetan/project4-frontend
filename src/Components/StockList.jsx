@@ -8,7 +8,7 @@ export default function StocksPage({ triggerRefresh }) {
     console.log(stockList);
   }, [triggerRefresh]);
 
-  if (stockList) {
+  if (stockList !== []) {
     mapStock = stockList.map((stock) => {
       return (
         <tr key={stock.name}>
@@ -36,11 +36,11 @@ export default function StocksPage({ triggerRefresh }) {
       const stocksData = await stocksResponse.json();
 
       //Set Stocklist if stock is not empty
-      if (stocksData) {
-        setStockList(stocksData);
+      if (stocksData.status !== 200) {
+        console.log(stocksData.result);
+      } else if (stocksData.status === 200) {
+        setStockList(stocksData.data);
       }
-
-      console.log(stocksData);
     } catch (error) {
       console.log(error.message);
     }

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 
 export default function Navbar(props) {
+  let checkState = useSelector((state) => state.states.isLoggedIn);
   return (
     <nav className="flex items-center justify-between flex-wrap p-6 bg-lightseagreen">
       <div className="flex items-center flex-shrink-0 text-azure mr-6">
@@ -31,32 +34,41 @@ export default function Navbar(props) {
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow">
-          <a
-            href="./"
+          <Link
+            to={"./"}
             className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
           >
             Dashboard
-          </a>
+          </Link>
           <Link
             to={"./dashboard/stockspage"}
             className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
           >
             Stocks Page
           </Link>
-          <a
-            href="#responsive-header"
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
+          <Link
+            to={"./dashboard/userspage"}
+            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
           >
-            Employee
-          </a>
+            Users
+          </Link>
         </div>
         <div>
-          <Link
-            to="/login"
-            className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-          >
-            Login
-          </Link>
+          {checkState ? (
+            <Link
+              to="/logout"
+              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            >
+              Logout
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>
