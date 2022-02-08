@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function StocksPage({ triggerRefresh }) {
+export default function StocksList({ triggerRefresh }) {
   const [stockList, setStockList] = useState([]);
   let mapStock;
   useEffect(() => {

@@ -1,8 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import StockList from "../Components/StockList";
-import AddStockForms from "../Components/AddStockForms";
-import StockPageNavbar from "../Components/StockPageNavBar";
+import StockList from "../Components/Stocks/StockList";
+import AddStockForms from "../Components/Stocks/AddStockForms";
+import StockPageNavbar from "../Components/Stocks/StockPageNavBar";
 
 export default function StocksPage() {
   const [triggerRefresh, setTriggerRefresh] = useState(false);

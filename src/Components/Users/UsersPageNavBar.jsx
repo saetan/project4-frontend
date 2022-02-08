@@ -9,7 +9,7 @@ export default function UsersPageNavbar(props) {
     setToggleToAddStockPage(false);
   };
   return (
-    <nav className="flex flex-col  bg-atoll h-screen w-full items-center h-full">
+    <nav className="flex flex-col  bg-atoll w-full items-center h-full">
       <div>
         <span className="font-semibold text-2xl text-center text-azure">
           Users Page

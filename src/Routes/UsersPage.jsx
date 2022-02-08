@@ -1,8 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import StockList from "../Components/StockList";
-import AddUserForm from "../Components/AddUserForm";
-import UsersPageNavbar from "../Components/UsersPageNavBar";
+import StockList from "../Components/Stocks/StockList";
+import AddUserForm from "../Components/Users/AddUserForm";
+import UsersPageNavbar from "../Components/Users/UsersPageNavBar";
 
 export default function UsersPage() {
   const [triggerRefresh, setTriggerRefresh] = useState(false);
