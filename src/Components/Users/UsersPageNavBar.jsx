@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 export default function UsersPageNavbar(props) {
-  const { setToggleToAddStockPage } = props;
-  const toggleAddStockPage = (event) => {
-    setToggleToAddStockPage(true);
+  const { setToggleToAddUsersPage } = props;
+  const toggleAddUserPage = (event) => {
+    setToggleToAddUsersPage(true);
   };
-  const toggleStockListPage = (event) => {
-    setToggleToAddStockPage(false);
+  const toggleUserListPage = (event) => {
+    setToggleToAddUsersPage(false);
   };
   return (
     <nav className="flex flex-col  bg-atoll w-full items-center h-full">
@@ -17,13 +17,13 @@ export default function UsersPageNavbar(props) {
       </div>
       <div className="grid grid-cols-1 text-xl mt-5">
         <button
-          onClick={toggleAddStockPage}
+          onClick={toggleAddUserPage}
           className="block mt-4 lg:inline-block lg:mt-0 text-blackpearl hover:text-lightseagreen"
         >
           Add User
         </button>
         <button
-          onClick={toggleStockListPage}
+          onClick={toggleUserListPage}
           className="block mt-4 lg:inline-block lg:mt-0 text-blackpearl hover:text-lightseagreen"
         >
           Users List

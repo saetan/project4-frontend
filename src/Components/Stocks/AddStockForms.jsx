@@ -107,15 +107,26 @@ export default function AddStockForms(props) {
               Stock Quantity
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+              className={
+                stock.quantity
+                  ? "shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+              }
               value={stock.quantity}
               type="number"
               onChange={handleQuantityChange}
               id="quantity"
               type="number"
               placeholder="00.00"
+              min="0.00"
             />
-            <p className="text-red-500 text-2xl italic">Invalid Format.</p>
+            {stock.quantity ? (
+              ""
+            ) : (
+              <p className="text-red-500 text-2xl italic">
+                Please fill in the price
+              </p>
+            )}
           </div>
 
           <div class="mb-16">
@@ -130,6 +141,7 @@ export default function AddStockForms(props) {
               id="price"
               type="number"
               placeholder="$00.00"
+              min="0.00"
               value={stock.price}
               onChange={handlePriceChange}
             />

@@ -1,5 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StockList from "../Components/Stocks/StockList";
 import AddStockForms from "../Components/Stocks/AddStockForms";
 import StockPageNavbar from "../Components/Stocks/StockPageNavBar";

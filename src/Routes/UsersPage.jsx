@@ -1,29 +1,28 @@
-import { Link, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
-import StockList from "../Components/Stocks/StockList";
+import { useState } from "react";
+import UserList from "../Components/Users/UserList";
 import AddUserForm from "../Components/Users/AddUserForm";
 import UsersPageNavbar from "../Components/Users/UsersPageNavBar";
 
 export default function UsersPage() {
   const [triggerRefresh, setTriggerRefresh] = useState(false);
-  const [isAddUserPage, setToggleToAddStockPage] = useState(false);
+  const [isAddUserPage, setToggleToAddUsersPage] = useState(false);
 
   return (
     <div className="flex">
       <div className="w-64">
-        <UsersPageNavbar setToggleToAddStockPage={setToggleToAddStockPage} />
+        <UsersPageNavbar setToggleToAddUsersPage={setToggleToAddUsersPage} />
       </div>
       <div className="w-full">
         {isAddUserPage ? (
           <AddUserForm
             setTriggerRefresh={setTriggerRefresh}
             triggerRefresh={triggerRefresh}
-            setToggleToAddStockPage={setToggleToAddStockPage}
+            setToggleToAddUsersPage={setToggleToAddUsersPage}
           />
         ) : (
-          <StockList
+          <UserList
             triggerRefresh={triggerRefresh}
-            setToggleToAddStockPage={setToggleToAddStockPage}
+            setToggleToAddUsersPage={setToggleToAddUsersPage}
           />
         )}
       </div>

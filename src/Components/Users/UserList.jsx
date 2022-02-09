@@ -36,11 +36,11 @@ export default function UserList({ triggerRefresh }) {
 
       const usersData = await usersResponse.json();
 
-      //Set Stocklist if stock is not empty
+      //Set UserList if user is not empty
       if (usersData.status !== 200) {
         console.log(usersData.result);
       } else if (usersData.status === 200) {
-        setStockList(usersData.data);
+        setUserList(usersData.data);
       }
     } catch (error) {
       console.log(error.message);
@@ -49,7 +49,7 @@ export default function UserList({ triggerRefresh }) {
 
   return (
     <div className="flex justify-center items-center font-bold text-2xl">
-      {stockList.length ? (
+      {userList.length ? (
         <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
           <thead className="bg-lightseagreen">
             <tr className="text-azure">
@@ -59,7 +59,7 @@ export default function UserList({ triggerRefresh }) {
               <th className="border border-blackpearl">Type</th>
             </tr>
           </thead>
-          <tbody>{mapStock}</tbody>
+          <tbody>{mapUsers}</tbody>
         </table>
       ) : (
         "No Userlist"
