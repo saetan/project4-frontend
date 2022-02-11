@@ -7,11 +7,27 @@ import { useDispatch } from "react-redux";
 export default function LoginPage() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
 
+  const [isEmpty, setIsEmpty] = useState({
+    email: false,
+    password: false,
+  });
+
+  const checkisEmpty = (event) => {
+    let newEmpty = { ...isEmpty };
+    if (event.currentTarget.value) {
+      newEmpty[event.currentTarget.id] = false;
+      setIsEmpty(newEmpty);
+    } else {
+      newEmpty[event.currentTarget.id] = true;
+      setIsEmpty(newEmpty);
+    }
+  };
   const handleEmailChange = (event) => {
     setLogin({
       ...login,
@@ -64,48 +80,68 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="w-full max-w flex justify-center items-center h-screen">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div className="mb-4">
+      <div className="w-full max-w flex justify-center items-center h-screen bg-oyesterbay">
+        <form className="bg-white shadow-md rounded px-24 pt-24 pb-24 mb-4">
+          <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-xl font-bold mb-2"
               for="email"
             >
               Email
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={
+                isEmpty.email
+                  ? "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              }
               id="email"
               type="text"
               placeholder="Email"
               value={login.email}
               onChange={handleEmailChange}
+              onBlur={checkisEmpty}
             />
+            {isEmpty.email ? (
+              <p className="text-red-500 text-xs italic">
+                Please fill in your email.
+              </p>
+            ) : (
+              ""
+            )}
           </div>
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-xl font-bold mb-2"
               for="password"
             >
               Password
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className={
+                isEmpty.password
+                  ? "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              }
               value={login.password}
               type="password"
               onChange={handlePasswordChange}
               id="password"
-              type="password"
               placeholder="******************"
+              onBlur={checkisEmpty}
             />
-            <p className="text-red-500 text-xs italic">
-              Please fill in your password.
-            </p>
+            {isEmpty.password ? (
+              <p className="text-red-500 text-xs italic">
+                Please fill in your password.
+              </p>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex items-center justify-between">
             <button
               onClick={handleSubmit}
-              className="inline-block align-baseline font-bold text-sm text-atoll hover:text-lightseagreen"
+              className="inline-block align-baseline font-bold text-xl text-atoll hover:text-lightseagreen"
             >
               Submit
             </button>
