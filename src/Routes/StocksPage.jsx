@@ -8,7 +8,7 @@ export default function StocksPage() {
   const [isAddStockPage, setToggleToAddStockPage] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="flex bg-oyesterbay">
       <div className="w-64">
         <StockPageNavbar setToggleToAddStockPage={setToggleToAddStockPage} />
       </div>

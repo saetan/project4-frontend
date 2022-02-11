@@ -1,38 +1,54 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function UserList({ triggerRefresh, setTriggerRefresh }) {
   const [userList, setUserList] = useState([]);
   let mapUsers;
+  let navigate = useNavigate();
   useEffect(() => {
     retrieveUserList();
   }, [triggerRefresh]);
 
   const handleDelete = async (event) => {
     try {
-      console.log(event.currentTarget.id);
-      //call delete
-      const deleteResponse = await fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/users/${event.currentTarget.id}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const warningModal = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (warningModal.isConfirmed) {
+        //call delete
+        const deleteResponse = await fetch(
+          `${process.env.REACT_APP_API_ENDPOINT}/users/${event.currentTarget.id}`,
+          {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      const deleteResponseMessage = await deleteResponse.json();
-      if (deleteResponseMessage.status === 200) {
-        await Swal.fire(deleteResponseMessage.message);
-        setTriggerRefresh(!triggerRefresh);
-      } else {
-        throw new Error(deleteResponseMessage.message);
+        const deleteResponseMessage = await deleteResponse.json();
+        if (deleteResponseMessage.status === 200) {
+          await Swal.fire(deleteResponseMessage.message);
+          setTriggerRefresh(!triggerRefresh);
+        } else {
+          throw new Error(deleteResponseMessage.message);
+        }
       }
     } catch (error) {
       await Swal.fire(error.message);
     }
+  };
+
+  const handleEdit = async (event) => {
+    navigate(`/dashboard/user/edit/${event.currentTarget.id}`);
   };
 
   if (userList !== []) {
@@ -45,7 +61,9 @@ export default function UserList({ triggerRefresh, setTriggerRefresh }) {
           <td className="border border-blackpearl">{user.type}</td>
           <td className="border border-blackpearl">
             <div className="flex flex-col">
-              <button>Edit</button>
+              <button id={user._id} onClick={handleEdit}>
+                Edit
+              </button>
               <button id={user._id} onClick={handleDelete}>
                 Delete
               </button>
