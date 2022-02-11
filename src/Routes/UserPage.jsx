@@ -10,7 +10,10 @@ export default function UsersPage() {
       <div className="w-64">
         <UserPageNavbar />
       </div>
-      <UserEditPage />
+      <UserEditPage
+        setTriggerRefresh={setTriggerRefresh}
+        triggerRefresh={triggerRefresh}
+      />
     </div>
   );
 }

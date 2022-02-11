@@ -103,10 +103,10 @@ export default function AddStockForms(props) {
   return (
     <>
       <div className="w-full max-w flex justify-center items-center h-full">
-        <form className="bg-white shadow-md rounded-lg px-32 pt-24 pb-32 mb-16">
-          <div class="mb-16">
+        <form className="bg-white shadow-md rounded-lg px-12 pt-2 mt-6 pb-6 mb-6">
+          <div class="mb-8 mt-8">
             <label
-              className="block text-gray-700 text-2xl font-bold mb-8"
+              className="block text-gray-700 text-xl font-bold mb-4"
               for="stockName"
             >
               Stock Name
@@ -114,8 +114,8 @@ export default function AddStockForms(props) {
             <input
               className={
                 !isEmpty.name
-                  ? "shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+                  ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border border-red-500 rounded w-full py-4 px-6 text-gray-700 mb-6 leading-tight focus:outline-none focus:shadow-outline"
               }
               id="name"
               type="text"
@@ -127,14 +127,14 @@ export default function AddStockForms(props) {
             {!isEmpty.name ? (
               ""
             ) : (
-              <p className="text-red-500 text-2xl italic">
+              <p className="text-red-500 text-md italic">
                 Please fill in the Stock Name
               </p>
             )}
           </div>
-          <div className="mb-16">
+          <div className="mb-8">
             <label
-              className="block text-gray-700 text-2xl font-bold mb-8"
+              className="block text-gray-700 text-xl font-bold mb-4"
               for="quantity"
             >
               Stock Quantity
@@ -142,8 +142,8 @@ export default function AddStockForms(props) {
             <input
               className={
                 !isEmpty.quantity
-                  ? "shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+                  ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border border-red-500 rounded w-full py-4 px-6 text-gray-700 mb-6 leading-tight focus:outline-none focus:shadow-outline"
               }
               value={stock.quantity}
               type="number"
@@ -157,15 +157,15 @@ export default function AddStockForms(props) {
             {!isEmpty.quantity ? (
               ""
             ) : (
-              <p className="text-red-500 text-2xl italic">
+              <p className="text-red-500 text-md italic">
                 Please fill in the quantity
               </p>
             )}
           </div>
 
-          <div class="mb-16">
+          <div class="mb-8">
             <label
-              className="block text-gray-700 text-2xl font-bold mb-8"
+              className="block text-gray-700 text-xl font-bold mb-4"
               for="price"
             >
               Price
@@ -173,7 +173,7 @@ export default function AddStockForms(props) {
             <input
               className={
                 !isEmpty.price
-                  ? "shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
               }
               id="price"
@@ -187,7 +187,7 @@ export default function AddStockForms(props) {
             {!isEmpty.price ? (
               ""
             ) : (
-              <p className="text-red-500 text-2xl italic">
+              <p className="text-red-500 text-md italic">
                 Please fill in the price
               </p>
             )}

@@ -8,13 +8,16 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-export default function UserEditPage({ triggerRefresh, setTriggerRefresh }) {
+export default function UserEditPage(props) {
   let { id } = useParams();
   const [userData, setUserData] = useState([]);
-  const [isDisabled, setDisabled] = useState(true);
+  const [isDisabled, setDisabled] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
 
+  const { triggerRefresh, setTriggerRefresh } = props;
+
   useEffect(() => {
+    console.log("UseEffect Called");
     retrieveUserData();
     checkIsDisabled();
   }, [triggerRefresh]);
@@ -48,7 +51,6 @@ export default function UserEditPage({ triggerRefresh, setTriggerRefresh }) {
 
   const updateUserData = async () => {
     try {
-      console.log("uwu");
       const usersResponse = await fetch(
         `${process.env.REACT_APP_API_ENDPOINT}/users/${id}`,
         {
@@ -68,6 +70,8 @@ export default function UserEditPage({ triggerRefresh, setTriggerRefresh }) {
         console.log(user.result);
       } else if (user.status === 200) {
         Swal.fire(`Updated ${user.message}`);
+        console.log("Triggering refresh");
+        setTriggerRefresh(!triggerRefresh);
       }
     } catch (error) {
       console.log(error.message);
@@ -123,7 +127,11 @@ export default function UserEditPage({ triggerRefresh, setTriggerRefresh }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    updateUserData();
+    try {
+      const getResponse = await updateUserData();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -213,7 +221,6 @@ export default function UserEditPage({ triggerRefresh, setTriggerRefresh }) {
 
           <div className="flex items-center justify-between">
             <button
-              disabled={isDisabled}
               onClick={handleSubmit}
               className="inline-block align-baseline font-bold text-2xl text-atoll hover:text-lightseagreen disabled: text-grey disabled: hover: text-grey"
             >
