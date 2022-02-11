@@ -22,6 +22,7 @@ export default function UsersPage() {
         ) : (
           <UserList
             triggerRefresh={triggerRefresh}
+            setTriggerRefresh={setTriggerRefresh}
             setToggleToAddUsersPage={setToggleToAddUsersPage}
           />
         )}

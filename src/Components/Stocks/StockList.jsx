@@ -5,7 +5,6 @@ export default function StocksList({ triggerRefresh }) {
   let mapStock;
   useEffect(() => {
     retrieveStockList();
-    console.log(stockList);
   }, [triggerRefresh]);
 
   if (stockList !== []) {
@@ -47,7 +46,7 @@ export default function StocksList({ triggerRefresh }) {
   };
 
   return (
-    <div className="flex justify-center items-center font-bold text-2xl">
+    <div className="flex justify-center items-center font-bold text-xl">
       {stockList.length ? (
         <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
           <thead className="bg-lightseagreen">
