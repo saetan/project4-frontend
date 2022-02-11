@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 //To validate Email
@@ -10,8 +9,6 @@ function validateEmail(email) {
 }
 
 export default function AddUserForm(props) {
-  let { setTriggerRefresh, triggerRefresh } = props;
-  let navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     type: "admin",
@@ -19,7 +16,7 @@ export default function AddUserForm(props) {
     email: "",
   });
   const [isDisabled, setDisabled] = useState(true);
-  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
 
   useEffect(() => {
     checkIsDisabled();
@@ -87,7 +84,7 @@ export default function AddUserForm(props) {
       console.log(response.status);
       if (response.status === 200) {
         console.log("I am here");
-        await Swal.fire("Add user Successful Successful");
+        await Swal.fire(`${user.username} is added successfully`);
         setUser({
           username: "",
           type: "admin",
@@ -96,7 +93,7 @@ export default function AddUserForm(props) {
         });
         //refresh the form
       } else {
-        throw new Error(decodedResponse.result);
+        throw new Error(decodedResponse.message);
       }
     } catch (error) {
       console.warn(error);
@@ -171,7 +168,9 @@ export default function AddUserForm(props) {
               placeholder="role"
             >
               <option value="admin">admin</option>
-              <option value="user">user</option>
+              <option value="employee">employee</option>
+              <option value="employee">customer</option>
+              <option value="employee">supplier</option>
             </select>
           </div>
 

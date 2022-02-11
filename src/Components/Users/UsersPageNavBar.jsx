@@ -9,7 +9,7 @@ export default function UsersPageNavbar(props) {
     setToggleToAddUsersPage(false);
   };
   return (
-    <nav className="flex flex-col  bg-atoll w-full items-center h-full">
+    <nav className="flex flex-col  bg-atoll w-full items-center h-screen">
       <div>
         <span className="font-semibold text-2xl text-center text-azure">
           Users Page

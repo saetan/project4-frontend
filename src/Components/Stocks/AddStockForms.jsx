@@ -1,20 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function AddStockForms(props) {
-  let { setTriggerRefresh, triggerRefresh } = props;
-  let navigate = useNavigate();
   const [stock, setStock] = useState({
     name: "",
     quantity: 0,
     price: 0.0,
   });
-  const [isDisabled, setDisabled] = useState(true);
 
+  const [isEmpty, setEmpty] = useState({
+    name: false,
+    quantity: false,
+    price: false,
+  });
+
+  const [isDisabled, setDisabled] = useState(true);
   useEffect(() => {
     checkIsDisabled();
   }, [stock]);
+
+  const checkIsEmpty = (event) => {
+    let fillName = event.currentTarget.id;
+    let newIsEmpty = {
+      ...isEmpty,
+    };
+    if (!stock[fillName]) {
+      newIsEmpty[event.currentTarget.id] = true;
+      setEmpty(newIsEmpty);
+      return;
+    } else {
+      if (stock[fillName]) {
+        newIsEmpty[event.currentTarget.id] = false;
+        setEmpty(newIsEmpty);
+        return;
+      }
+    }
+  };
 
   const checkIsDisabled = () => {
     console.log("Checking");
@@ -24,6 +45,7 @@ export default function AddStockForms(props) {
       setDisabled(true);
     }
   };
+
   const handleNameChange = (event) => {
     setStock({
       ...stock,
@@ -63,7 +85,6 @@ export default function AddStockForms(props) {
 
       if (response.status === 200) {
         Swal.fire("Add Stock Successful Successful");
-        setTriggerRefresh(!triggerRefresh);
         //refresh the form
       } else {
         throw new Error(decodedResponse.message);
@@ -91,13 +112,25 @@ export default function AddStockForms(props) {
               Stock Name
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="text"
+              className={
+                !isEmpty.name
+                  ? "shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+              }
+              id="name"
               type="text"
               placeholder="Stock Name"
               value={stock.name}
               onChange={handleNameChange}
+              onBlur={checkIsEmpty}
             />
+            {!isEmpty.name ? (
+              ""
+            ) : (
+              <p className="text-red-500 text-2xl italic">
+                Please fill in the Stock Name
+              </p>
+            )}
           </div>
           <div className="mb-16">
             <label
@@ -108,7 +141,7 @@ export default function AddStockForms(props) {
             </label>
             <input
               className={
-                stock.quantity
+                !isEmpty.quantity
                   ? "shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
               }
@@ -119,12 +152,13 @@ export default function AddStockForms(props) {
               type="number"
               placeholder="00.00"
               min="0.00"
+              onBlur={checkIsEmpty}
             />
-            {stock.quantity ? (
+            {!isEmpty.quantity ? (
               ""
             ) : (
               <p className="text-red-500 text-2xl italic">
-                Please fill in the price
+                Please fill in the quantity
               </p>
             )}
           </div>
@@ -137,14 +171,26 @@ export default function AddStockForms(props) {
               Price
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={
+                !isEmpty.price
+                  ? "shadow appearance-none border rounded w-full py-8 px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+              }
               id="price"
               type="number"
               placeholder="$00.00"
               min="0.00"
               value={stock.price}
               onChange={handlePriceChange}
+              onBlur={checkIsEmpty}
             />
+            {!isEmpty.price ? (
+              ""
+            ) : (
+              <p className="text-red-500 text-2xl italic">
+                Please fill in the price
+              </p>
+            )}
           </div>
 
           <div className="flex items-center justify-between">

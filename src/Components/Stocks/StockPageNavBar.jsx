@@ -9,7 +9,7 @@ export default function StockPageNavbar(props) {
     setToggleToAddStockPage(false);
   };
   return (
-    <nav className="flex flex-col  bg-atoll w-full items-center h-full">
+    <nav className="flex flex-col  bg-atoll w-full items-center h-screen">
       <div>
         <span className="font-semibold text-2xl text-center text-azure">
           Stocks Page
