@@ -9,14 +9,13 @@ export default function OverviewChart() {
   const [chartLabels, setChartLabels] = useState();
   const [chartData, setChartData] = useState();
 
-  useEffect(async () => {
-    await retrieveStockList();
-    if (stockList) {
-      sortByCategory();
-    }
+  useEffect(() => {
+    retrieveStockList();
+    sortByCategory();
   }, [stockList]);
 
   const retrieveStockList = async () => {
+    console.log("Retrieving");
     try {
       const stocksResponse = await fetch(
         `${process.env.REACT_APP_API_ENDPOINT}/stocks`,
