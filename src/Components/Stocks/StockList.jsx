@@ -10,10 +10,12 @@ export default function StocksList({ triggerRefresh }) {
   if (stockList !== []) {
     mapStock = stockList.map((stock) => {
       return (
-        <tr key={stock.name}>
+        <tr key={stock.skuID}>
+          <td className="border border-blackpearl">{stock.skuID}</td>
           <td className="border border-blackpearl">{stock.name}</td>
           <td className="border border-blackpearl">{stock.price}</td>
           <td className="border border-blackpearl">{stock.quantity}</td>
+          <td className="border border-blackpearl">{stock.category}</td>
         </tr>
       );
     });
@@ -46,14 +48,16 @@ export default function StocksList({ triggerRefresh }) {
   };
 
   return (
-    <div className="flex justify-center items-center font-bold text-xl">
+    <div className="flex justify-center items-center font-bold text-xl h-screen">
       {stockList.length ? (
         <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
           <thead className="bg-lightseagreen">
             <tr className="text-azure">
+              <th className="border border-blackpearl">SKU</th>
               <th className="border border-blackpearl">Name</th>
               <th className="border border-blackpearl">Price</th>
               <th className="border border-blackpearl">Quantity</th>
+              <th className="border border-blackpearl">Category</th>
             </tr>
           </thead>
           <tbody>{mapStock}</tbody>

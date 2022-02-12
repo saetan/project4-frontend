@@ -10,6 +10,7 @@ import StocksPage from "./Routes/StocksPage";
 import LogoutPage from "./Routes/LogoutPage";
 import UsersPage from "./Routes/UsersPage";
 import UserPage from "./Routes/UserPage";
+import OverviewPage from "./Routes/OverviewPage";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -22,6 +23,7 @@ ReactDOM.render(
             <Route path="login" element={<LoginPage />} />
             <Route path="logout" element={<LogoutPage />} />
             <Route path="dashboard" element={<Dashboard />}>
+              <Route path="overview" element={<OverviewPage />} />
               <Route path="stockspage" element={<StocksPage />} />
               <Route path="userspage" element={<UsersPage />} />
               <Route path="user/edit/:id" element={<UserPage />} />

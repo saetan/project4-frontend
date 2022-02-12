@@ -3,15 +3,19 @@ import Swal from "sweetalert2";
 
 export default function AddStockForms(props) {
   const [stock, setStock] = useState({
+    skuID: "",
     name: "",
     quantity: 0,
     price: 0.0,
+    category: "",
   });
 
   const [isEmpty, setEmpty] = useState({
+    skuID: false,
     name: false,
     quantity: false,
     price: false,
+    category: false,
   });
 
   const [isDisabled, setDisabled] = useState(true);
@@ -39,7 +43,13 @@ export default function AddStockForms(props) {
 
   const checkIsDisabled = () => {
     console.log("Checking");
-    if (stock.price && stock.name && stock.quantity) {
+    if (
+      stock.price &&
+      stock.name &&
+      stock.quantity &&
+      stock.category &&
+      stock.skuID
+    ) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -64,6 +74,20 @@ export default function AddStockForms(props) {
     setStock({
       ...stock,
       quantity: event.currentTarget.value,
+    });
+  };
+
+  const handleCategoryChange = (event) => {
+    setStock({
+      ...stock,
+      category: event.currentTarget.value,
+    });
+  };
+
+  const handleSKUIDChange = (event) => {
+    setStock({
+      ...stock,
+      skuID: event.currentTarget.value,
     });
   };
 
@@ -104,9 +128,37 @@ export default function AddStockForms(props) {
     <>
       <div className="w-full max-w flex justify-center items-center h-full">
         <form className="bg-white shadow-md rounded-lg px-12 pt-2 mt-6 pb-6 mb-6">
-          <div class="mb-8 mt-8">
+          <div class="mb-4 mt-4">
             <label
-              className="block text-gray-700 text-xl font-bold mb-4"
+              className="block text-gray-700 text-lg font-bold mb-4"
+              for="skuid"
+            >
+              SKU ID
+            </label>
+            <input
+              className={
+                !isEmpty.skuID
+                  ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+              }
+              id="skuID"
+              type="string"
+              placeholder="Key in your SKUID"
+              value={stock.skuID}
+              onChange={handleSKUIDChange}
+              onBlur={checkIsEmpty}
+            />
+            {!isEmpty.skuID ? (
+              ""
+            ) : (
+              <p className="text-red-500 text-md italic">
+                Please fill in your SKU ID
+              </p>
+            )}
+          </div>
+          <div class="mb-4">
+            <label
+              className="block text-gray-700 text-lg font-bold mb-4"
               for="stockName"
             >
               Stock Name
@@ -132,9 +184,9 @@ export default function AddStockForms(props) {
               </p>
             )}
           </div>
-          <div className="mb-8">
+          <div className="mb-4">
             <label
-              className="block text-gray-700 text-xl font-bold mb-4"
+              className="block text-gray-700 text-lg font-bold mb-4"
               for="quantity"
             >
               Stock Quantity
@@ -163,9 +215,9 @@ export default function AddStockForms(props) {
             )}
           </div>
 
-          <div class="mb-8">
+          <div class="mb-4">
             <label
-              className="block text-gray-700 text-xl font-bold mb-4"
+              className="block text-gray-700 text-lg font-bold mb-4"
               for="price"
             >
               Price
@@ -189,6 +241,34 @@ export default function AddStockForms(props) {
             ) : (
               <p className="text-red-500 text-md italic">
                 Please fill in the price
+              </p>
+            )}
+          </div>
+          <div class="mb-4">
+            <label
+              className="block text-gray-700 text-lg font-bold mb-4"
+              for="price"
+            >
+              Category
+            </label>
+            <input
+              className={
+                !isEmpty.price
+                  ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
+              }
+              id="category"
+              type="string"
+              placeholder="Uncategories"
+              value={stock.category}
+              onChange={handleCategoryChange}
+              onBlur={checkIsEmpty}
+            />
+            {!isEmpty.category ? (
+              ""
+            ) : (
+              <p className="text-red-500 text-md italic">
+                Please fill in your category
               </p>
             )}
           </div>
