@@ -23,6 +23,16 @@ export default function AddStockForms(props) {
     checkIsDisabled();
   }, [stock]);
 
+  const refreshForm = (event) => {
+    setStock({
+      skuID: "",
+      name: "",
+      quantity: 0,
+      price: 0.0,
+      category: "",
+    });
+  };
+
   const checkIsEmpty = (event) => {
     let fillName = event.currentTarget.id;
     let newIsEmpty = {
@@ -92,6 +102,7 @@ export default function AddStockForms(props) {
   };
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_ENDPOINT}/stocks/createstock`,
@@ -110,12 +121,13 @@ export default function AddStockForms(props) {
       if (response.status === 200) {
         Swal.fire("Add Stock Successful Successful");
         //refresh the form
+        refreshForm();
       } else {
         throw new Error(decodedResponse.message);
       }
     } catch (error) {
       console.warn(error);
-      Swal.fire({
+      await Swal.fire({
         icon: "error",
         title: "Oops...",
         text: error.message,
