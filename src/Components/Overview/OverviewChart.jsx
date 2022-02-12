@@ -81,5 +81,7 @@ export default function OverviewChart() {
     ],
   };
 
-  return <>{chartData ? <Pie data={data} /> : "No Data"}</>;
+  return (
+    <div className="w-3/4">{chartData ? <Pie data={data} /> : "No Data"}</div>
+  );
 }
