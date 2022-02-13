@@ -1,7 +1,7 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
 import OverviewChart from "../Components/Overview/OverviewChart";
+import OverviewTable from "../Components/Overview/OverviewTable";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -11,7 +11,9 @@ export default function OverviewPage() {
       <div className="flex items-center justify-center">
         <OverviewChart />
       </div>
-      <div className="">I am a table</div>
+      <div className="flex items-center justify-center">
+        <OverviewTable />
+      </div>
     </div>
   );
 }
