@@ -4,11 +4,7 @@ import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function OverviewChart() {
-  const [stockList, setStockList] = useState([]);
-
-  let chartData;
-
+export default function OverviewChart({ generatedData, generatedLabels }) {
   const generateData = (chartLabels, chartData) => {
     let data = {
       labels: chartLabels, //["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -40,55 +36,7 @@ export default function OverviewChart() {
     return data;
   };
 
-  const sortByCategory = () => {
-    let generatedLabels = [];
-    let generatedData = [];
-
-    if (stockList) {
-      for (let stock of stockList) {
-        if (stock) {
-          generatedLabels.push(stock.category);
-          generatedData.push(1);
-        }
-      }
-    }
-
-    const result = generateData(generatedLabels, generatedData);
-    return result;
-  };
-
-  const retrieveStockList = async () => {
-    console.log("Retrieving");
-    try {
-      const stocksResponse = await fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/stocks`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const stocksData = await stocksResponse.json();
-
-      //Set Stocklist if stock is not empty
-      if (stocksData.status !== 200) {
-        console.log(stocksData.result);
-      } else if (stocksData.status === 200) {
-        setStockList(stocksData.data);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  useEffect(() => {
-    retrieveStockList();
-  }, []);
-
-  chartData = sortByCategory();
+  let chartData = generateData(generatedLabels, generatedData);
   return (
     <div className="w-3/4">
       {chartData ? <Pie data={chartData} /> : "No Data"}
