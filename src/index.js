@@ -11,6 +11,7 @@ import LogoutPage from "./Routes/LogoutPage";
 import UsersPage from "./Routes/UsersPage";
 import UserPage from "./Routes/UserPage";
 import OverviewPage from "./Routes/OverviewPage";
+import StockPage from "./Routes/StockPage";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -25,6 +26,7 @@ ReactDOM.render(
             <Route path="dashboard" element={<Dashboard />}>
               <Route path="overview" element={<OverviewPage />} />
               <Route path="stockspage" element={<StocksPage />} />
+              <Route path="stock/edit/:id" element={<StockPage />} />
               <Route path="userspage" element={<UsersPage />} />
               <Route path="user/edit/:id" element={<UserPage />} />
             </Route>

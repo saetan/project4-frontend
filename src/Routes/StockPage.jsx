@@ -1,16 +1,16 @@
 import { useState } from "react";
-import UserPageNavbar from "../Components/User/UserPageNavBar";
-import UserEditPage from "../Components/User/UserEditPage";
+import StockPageNavBar from "../Components/Stock/StockPageNavBar";
+import StockEditPage from "../Components/Stock/StockEditPage";
 
-export default function UserPage() {
+export default function StockPage() {
   const [triggerRefresh, setTriggerRefresh] = useState(false);
 
   return (
     <div className="flex bg-oyesterbay">
       <div className="w-64">
-        <UserPageNavbar />
+        <StockPageNavBar />
       </div>
-      <UserEditPage
+      <StockEditPage
         setTriggerRefresh={setTriggerRefresh}
         triggerRefresh={triggerRefresh}
       />

@@ -1,9 +1,9 @@
-export default function UserPageNavbar(props) {
+export default function StockPageNavbar(props) {
   return (
     <nav className="flex flex-col  bg-atoll w-full items-center h-screen">
       <div>
         <span className="font-semibold text-2xl text-center text-azure">
-          User Edit Page
+          Stock Edit Page
         </span>
       </div>
     </nav>
