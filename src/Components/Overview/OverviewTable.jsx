@@ -11,7 +11,7 @@ export default function OverviewTable({ generatedData, generatedLabels }) {
   if (generatedData !== []) {
     tableData = generatedData.map((data) => {
       return (
-        <td key={data} className="border border-blackpearl">
+        <td key={data._id} className="border border-blackpearl">
           {data}
         </td>
       );

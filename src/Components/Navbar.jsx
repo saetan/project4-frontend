@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export default function Navbar(props) {
   let checkState = useSelector((state) => state.states.isLoggedIn);
   return (
-    <nav className="flex items-center justify-between flex-wrap p-6 bg-lightseagreen">
+    <nav className="flex items-center justify-between flex-wrap p-6 bg-lightseagreen min-w-full w-screen">
       <div className="flex items-center flex-shrink-0 text-azure mr-6">
         <svg
           className="fill-current h-8 w-8 mr-2"

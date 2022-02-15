@@ -24,7 +24,7 @@ export default function UserList({ triggerRefresh, setTriggerRefresh }) {
       if (warningModal.isConfirmed) {
         //call delete
         const deleteResponse = await fetch(
-          `${process.env.REACT_APP_API_ENDPOINT}/users/${event.currentTarget.id}`,
+          `${process.env.REACT_APP_API_ENDPOINT}/users/${event.target.id}`,
           {
             method: "DELETE",
             credentials: "include",
@@ -33,6 +33,8 @@ export default function UserList({ triggerRefresh, setTriggerRefresh }) {
             },
           }
         );
+
+        console.log(deleteResponse);
 
         const deleteResponseMessage = await deleteResponse.json();
         if (deleteResponseMessage.status === 200) {
