@@ -62,7 +62,7 @@ export default function OverviewPage() {
           generatedLabels={generatedLabels}
         />
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <OverviewTable
           generatedData={generatedData}
           generatedLabels={generatedLabels}
