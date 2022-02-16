@@ -22,6 +22,7 @@ export default function StocksPage() {
         ) : (
           <StockList
             triggerRefresh={triggerRefresh}
+            setTriggerRefresh={setTriggerRefresh}
             setToggleToAddStockPage={setToggleToAddStockPage}
           />
         )}
