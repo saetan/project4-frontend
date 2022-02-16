@@ -19,8 +19,11 @@ export default function StockEditPage(props) {
   useEffect(() => {
     console.log("UseEffect Called");
     retrieveStockData();
-    checkIsDisabled();
   }, [triggerRefresh]);
+
+  useEffect(() => {
+    checkIsDisabled();
+  });
 
   //Retrieve
   const retrieveStockData = async () => {
@@ -97,16 +100,19 @@ export default function StockEditPage(props) {
   };
 
   const checkIsDisabled = () => {
-    console.log("Checking");
+    console.log("Checking isDisabled");
+    console.log(stockData);
     if (
-      stockData.price &&
       stockData.name &&
+      stockData.price &&
       stockData.quantity &&
       stockData.category &&
       stockData.skuID
     ) {
+      console.log("Setting isDisabled to false");
       setDisabled(false);
     } else {
+      console.log("Setting isDisabled to true");
       setDisabled(true);
     }
   };
