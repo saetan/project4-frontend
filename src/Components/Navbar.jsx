@@ -52,6 +52,18 @@ export default function Navbar(props) {
           >
             Users
           </Link>
+          <Link
+            to={"./dashboard/incomingorders"}
+            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+          >
+            Incoming Orders
+          </Link>
+          <Link
+            to={"./dashboard/outgoingorders"}
+            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+          >
+            Outgoing Orders
+          </Link>
         </div>
         <div>
           {checkState ? (
