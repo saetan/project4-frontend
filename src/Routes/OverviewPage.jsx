@@ -7,6 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function OverviewPage() {
   const [stockList, setStockList] = useState();
+  const [currentSortSelection, setCurrentSortSelection] = useState("category");
   let generatedLabels = [];
   let generatedData = [];
 
@@ -48,15 +49,40 @@ export default function OverviewPage() {
     }
   };
 
+  const sortByItemNames = (labels, data) => {
+    if (stockList) {
+      for (let stock of stockList) {
+        if (stock) {
+          labels.push(stock.name);
+          data.push(stock.quantity);
+        }
+      }
+    }
+  };
+
+  const handleCategorySort = () => {
+    setCurrentSortSelection("category");
+  };
+
+  const handleItemNameSort = () => {
+    setCurrentSortSelection("itemName");
+  };
+
   useEffect(() => {
     retrieveStockList();
   }, []);
 
-  sortByCategory(generatedLabels, generatedData);
+  if (currentSortSelection === "category") {
+    sortByCategory(generatedLabels, generatedData);
+  } else {
+    sortByItemNames(generatedLabels, generatedData);
+  }
 
   return (
     <div className="grid grid-cols-2 bg-oyesterbay w-screen h-screen">
       <div className="flex items-center justify-center">
+        <button onClick={handleItemNameSort}>Sort By Item Names</button>
+        <button onClick={handleCategorySort}>Sort By Category</button>
         <OverviewChart
           generatedData={generatedData}
           generatedLabels={generatedLabels}
