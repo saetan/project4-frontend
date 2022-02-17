@@ -66,6 +66,17 @@ export default function OverviewPage() {
     }
   };
 
+  const sortByPrice = (labels, data) => {
+    if (stockList) {
+      for (let stock of stockList) {
+        if (stock) {
+          labels.push(stock.name);
+          data.push(stock.price);
+        }
+      }
+    }
+  };
+
   const handleCategorySort = () => {
     setCurrentSortSelection("category");
   };
@@ -74,14 +85,20 @@ export default function OverviewPage() {
     setCurrentSortSelection("itemName");
   };
 
+  const handlePriceSort = () => {
+    setCurrentSortSelection("price");
+  };
+
   useEffect(() => {
     retrieveStockList();
   }, []);
 
   if (currentSortSelection === "category") {
     sortByCategory(generatedLabels, generatedData);
-  } else {
+  } else if (currentSortSelection === "itemName") {
     sortByItemNames(generatedLabels, generatedData);
+  } else if (currentSortSelection === "price") {
+    sortByPrice(generatedLabels, generatedData);
   }
 
   return (
@@ -99,6 +116,12 @@ export default function OverviewPage() {
             onClick={handleCategorySort}
           >
             Sort By Category
+          </button>
+          <button
+            className="inline-block bg-toll text-sm px-4 py-2 bg-atoll leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            onClick={handlePriceSort}
+          >
+            Sort By Price
           </button>
         </div>
         <OverviewChart
