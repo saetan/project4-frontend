@@ -59,6 +59,12 @@ export default function IncomingOrdersList({
     navigate(`/dashboard/order/edit/${event.currentTarget.id}`);
   };
 
+  const handleReceived = (event) => {
+    //increase stock
+    console.log(event.currentTarget.order.quantity);
+    //delete this entry
+  };
+
   if (orderList !== []) {
     maporder = orderList.map((order) => {
       return (
@@ -75,6 +81,14 @@ export default function IncomingOrdersList({
               </button>
               <button id={order._id} onClick={handleDelete}>
                 Delete
+              </button>
+              <button
+                id={order._id}
+                onClick={() => {
+                  console.log(order.orderId);
+                }}
+              >
+                Recieved
               </button>
             </div>
           </td>
