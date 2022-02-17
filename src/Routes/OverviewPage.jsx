@@ -39,12 +39,18 @@ export default function OverviewPage() {
   };
 
   const sortByCategory = (labels, data) => {
+    let categoryCount = {};
     if (stockList) {
       for (let stock of stockList) {
         if (stock) {
           labels.push(stock.category);
-          data.push(1);
+          if (categoryCount[stock.category]) {
+            categoryCount[stock.category] += 1;
+          } else {
+            categoryCount[stock.category] = 1;
+          }
         }
+        data.push(categoryCount[stock.category]);
       }
     }
   };
@@ -81,8 +87,20 @@ export default function OverviewPage() {
   return (
     <div className="grid grid-cols-2 bg-oyesterbay w-screen h-screen">
       <div className="flex items-center justify-center">
-        <button onClick={handleItemNameSort}>Sort By Item Names</button>
-        <button onClick={handleCategorySort}>Sort By Category</button>
+        <div className="grid grid-cols-1">
+          <button
+            className="inline-block bg-atoll text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            onClick={handleItemNameSort}
+          >
+            Sort By Item Names
+          </button>
+          <button
+            className="inline-block bg-toll text-sm px-4 py-2 bg-atoll leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            onClick={handleCategorySort}
+          >
+            Sort By Category
+          </button>
+        </div>
         <OverviewChart
           generatedData={generatedData}
           generatedLabels={generatedLabels}
