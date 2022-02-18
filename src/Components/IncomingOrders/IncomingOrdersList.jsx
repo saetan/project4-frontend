@@ -56,7 +56,7 @@ export default function IncomingOrdersList({
   };
 
   const handleEdit = (event) => {
-    navigate(`/dashboard/order/edit/${event.currentTarget.id}`);
+    navigate(`/dashboard/incomingorder/edit/${event.currentTarget.id}`);
   };
 
   const handleReceived = (event) => {

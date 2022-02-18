@@ -56,7 +56,7 @@ export default function OutGoingOrdersList({
   };
 
   const handleEdit = (event) => {
-    navigate(`/dashboard/order/edit/${event.currentTarget.id}`);
+    navigate(`/dashboard/outgoingorder/edit/${event.currentTarget.id}`);
   };
 
   if (orderList !== []) {

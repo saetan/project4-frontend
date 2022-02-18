@@ -14,6 +14,8 @@ import OverviewPage from "./Routes/OverviewPage";
 import StockPage from "./Routes/StockPage";
 import IncomingOrdersPage from "./Routes/IncomingOrdersPage";
 import OutGoingOrdersPage from "./Routes/OutgoingOrders.page";
+import IncomingOrderPage from "./Routes/IncomingOrderPage";
+import OutgoingOrderPage from "./Routes/OutgoingOrderPage";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -32,7 +34,15 @@ ReactDOM.render(
               <Route path="userspage" element={<UsersPage />} />
               <Route path="user/edit/:id" element={<UserPage />} />
               <Route path="incomingorders" element={<IncomingOrdersPage />} />
+              <Route
+                path="incomingorder/edit/:id"
+                element={<IncomingOrderPage />}
+              />
               <Route path="outgoingorders" element={<OutGoingOrdersPage />} />
+              <Route
+                path="outgoingorder/edit/:id"
+                element={<OutgoingOrderPage />}
+              />
             </Route>
           </Route>
         </Routes>
