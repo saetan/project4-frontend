@@ -76,12 +76,60 @@ export default function OutGoingOrdersList({
               <button id={order._id} onClick={handleDelete}>
                 Delete
               </button>
+              <button
+                id={order._id}
+                onClick={() => {
+                  console.log(
+                    "Updating Order with the following SKU ID: " + order.skuID
+                  );
+                  handleCompleted(order);
+                }}
+              >
+                Completed
+              </button>
             </div>
           </td>
         </tr>
       );
     });
   }
+
+  const handleCompleted = async (data) => {
+    try {
+      const updateStock = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/orders/outgoing/completed/${data.skuID}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (updateStock.status === 200) {
+        const deleteResponse = await fetch(
+          `${process.env.REACT_APP_API_ENDPOINT}/orders/outgoing/${data._id}`,
+          {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const deleteResponseMessage = await deleteResponse.json();
+        if (deleteResponseMessage.status === 200) {
+          await Swal.fire("Completed Success");
+          setTriggerRefresh(!triggerRefresh);
+        } else {
+          throw new Error(deleteResponseMessage.message);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const retrieveOrderList = async () => {
     try {
