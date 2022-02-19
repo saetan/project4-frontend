@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import AutoSearchBar from "../AutoSearchBar";
 
 export default function IncomingOrdersForms() {
   const [order, setOrder] = useState({
@@ -10,6 +11,8 @@ export default function IncomingOrdersForms() {
     orderId: "",
   });
 
+  const [stocks, setStocks] = useState([]);
+
   const [isEmpty, setEmpty] = useState({
     skuID: false,
     stockName: false,
@@ -18,10 +21,30 @@ export default function IncomingOrdersForms() {
     orderId: false,
   });
 
+  const [selected, setSelected] = useState({
+    _id: "empty",
+    skuID: "",
+    name: "",
+    quantity: 0,
+    price: 0,
+    category: "uwu",
+  });
+
   const [isDisabled, setDisabled] = useState(true);
+
   useEffect(() => {
     checkIsDisabled();
   }, [order]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (selected) {
+      setOrder({ ...order, stockName: selected.name, price: selected.price });
+    }
+  }, [selected]);
 
   const refreshForm = (event) => {
     setOrder({
@@ -101,6 +124,29 @@ export default function IncomingOrdersForms() {
     });
   };
 
+  const fetchData = async () => {
+    try {
+      const stocksDataResponse = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/stocks`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (stocksDataResponse.status === 200) {
+        const stocksData = await stocksDataResponse.json();
+        if (stocksData) {
+          setStocks(stocksData.data);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -176,26 +222,14 @@ export default function IncomingOrdersForms() {
             >
               SKU ID
             </label>
-            <input
-              className={
-                !isEmpty.skuID
-                  ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
-              }
-              id="skuID"
-              type="string"
-              placeholder="Key in your SKUID"
-              value={order.skuID}
-              onChange={handleSKUIDChange}
-              onBlur={checkIsEmpty}
+            <div></div>
+            <AutoSearchBar
+              stocks={stocks}
+              selected={selected}
+              setSelected={setSelected}
+              setOrder={setOrder}
+              order={order}
             />
-            {!isEmpty.skuID ? (
-              ""
-            ) : (
-              <p className="text-red-500 text-md italic">
-                Please fill in your SKU ID
-              </p>
-            )}
           </div>
           <div class="mb-4">
             <label
@@ -205,6 +239,7 @@ export default function IncomingOrdersForms() {
               order Name
             </label>
             <input
+              disabled
               className={
                 !isEmpty.stockName
                   ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -213,7 +248,7 @@ export default function IncomingOrdersForms() {
               id="stockName"
               type="text"
               placeholder="stockName"
-              value={order.stockName}
+              value={selected.name}
               onChange={handleNameChange}
               onBlur={checkIsEmpty}
             />
@@ -264,6 +299,7 @@ export default function IncomingOrdersForms() {
               Price
             </label>
             <input
+              disabled
               className={
                 !isEmpty.price
                   ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -273,7 +309,7 @@ export default function IncomingOrdersForms() {
               type="number"
               placeholder="$00.00"
               min="0.00"
-              value={order.price}
+              value={selected.price}
               onChange={handlePriceChange}
               onBlur={checkIsEmpty}
             />

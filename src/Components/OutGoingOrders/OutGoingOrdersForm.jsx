@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import AutoSearchBar from "../AutoSearchBar";
 
 export default function OutGoingOrdersForms() {
   const [order, setOrder] = useState({
@@ -18,10 +19,25 @@ export default function OutGoingOrdersForms() {
     orderId: false,
   });
 
+  const [selected, setSelected] = useState({
+    _id: "empty",
+    skuID: "",
+    name: "",
+    quantity: 0,
+    price: 0,
+    category: "uwu",
+  });
+
   const [isDisabled, setDisabled] = useState(true);
+  const [stocks, setStocks] = useState([]);
+
   useEffect(() => {
     checkIsDisabled();
   }, [order]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const refreshForm = (event) => {
     setOrder({
@@ -48,6 +64,29 @@ export default function OutGoingOrdersForms() {
         setEmpty(newIsEmpty);
         return;
       }
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const stocksDataResponse = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/stocks`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (stocksDataResponse.status === 200) {
+        const stocksData = await stocksDataResponse.json();
+        if (stocksData) {
+          setStocks(stocksData.data);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -140,8 +179,8 @@ export default function OutGoingOrdersForms() {
     <>
       <div className="w-full max-w flex justify-center items-center h-full">
         <form className="bg-white shadow-md rounded-lg px-12 pt-2 mt-6 pb-6 mb-6">
-          <div class="mb-4 mt-4">
-            <div class="mb-4">
+          <div className="mb-4 mt-4">
+            <div className="mb-4">
               <label
                 className="block text-gray-700 text-lg font-bold mb-4"
                 for="orderId"
@@ -176,28 +215,13 @@ export default function OutGoingOrdersForms() {
             >
               SKU ID
             </label>
-            <input
-              className={
-                !isEmpty.skuID
-                  ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  : "shadow appearance-none border border-red-500 rounded w-full py-8 px-12 text-gray-700 mb-12 leading-tight focus:outline-none focus:shadow-outline"
-              }
-              id="skuID"
-              type="string"
-              placeholder="Key in your SKUID"
-              value={order.skuID}
-              onChange={handleSKUIDChange}
-              onBlur={checkIsEmpty}
+            <AutoSearchBar
+              stocks={stocks}
+              selected={selected}
+              setSelected={setSelected}
             />
-            {!isEmpty.skuID ? (
-              ""
-            ) : (
-              <p className="text-red-500 text-md italic">
-                Please fill in your SKU ID
-              </p>
-            )}
           </div>
-          <div class="mb-4">
+          <div className="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
               for="stockName"
@@ -205,6 +229,7 @@ export default function OutGoingOrdersForms() {
               order Name
             </label>
             <input
+              disabled
               className={
                 !isEmpty.stockName
                   ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -213,7 +238,7 @@ export default function OutGoingOrdersForms() {
               id="stockName"
               type="text"
               placeholder="stockName"
-              value={order.stockName}
+              value={selected.name}
               onChange={handleNameChange}
               onBlur={checkIsEmpty}
             />
@@ -256,7 +281,7 @@ export default function OutGoingOrdersForms() {
             )}
           </div>
 
-          <div class="mb-4">
+          <div className="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
               for="price"
@@ -264,6 +289,7 @@ export default function OutGoingOrdersForms() {
               Price
             </label>
             <input
+              disabled
               className={
                 !isEmpty.price
                   ? "shadow appearance-none border rounded w-full py-4 px-6 mb-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -273,7 +299,7 @@ export default function OutGoingOrdersForms() {
               type="number"
               placeholder="$00.00"
               min="0.00"
-              value={order.price}
+              value={selected.price}
               onChange={handlePriceChange}
               onBlur={checkIsEmpty}
             />
