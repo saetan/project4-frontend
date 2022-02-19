@@ -97,7 +97,10 @@ export default function StocksList({ triggerRefresh, setTriggerRefresh }) {
 
       //Set Stocklist if stock is not empty
       if (stocksData.status !== 200) {
-        console.log(stocksData.result);
+        if (stocksData.status === 401) {
+          await Swal.fire(stocksData.result);
+          navigate("/dashboard/overview");
+        }
       } else if (stocksData.status === 200) {
         setStockList(stocksData.data);
       }

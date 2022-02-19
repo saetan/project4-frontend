@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function Navbar(props) {
   let checkState = useSelector((state) => state.states.isLoggedIn);
+  let currentRole = useSelector((state) => state.states.role);
   return (
     <nav className="flex items-center justify-between flex-wrap p-6 bg-lightseagreen min-w-full w-screen">
       <div className="flex items-center flex-shrink-0 text-azure mr-6">
@@ -34,36 +35,42 @@ export default function Navbar(props) {
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow">
-          <Link
-            to={"./dashboard/overview"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Overview
-          </Link>
-          <Link
-            to={"./dashboard/stockspage"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Stocks Page
-          </Link>
-          <Link
-            to={"./dashboard/userspage"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Users
-          </Link>
-          <Link
-            to={"./dashboard/incomingorders"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Incoming Orders
-          </Link>
-          <Link
-            to={"./dashboard/outgoingorders"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Outgoing Orders
-          </Link>
+          {checkState ? (
+            <>
+              <Link
+                to={"./dashboard/overview"}
+                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              >
+                Overview
+              </Link>
+              <Link
+                to={"./dashboard/stockspage"}
+                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              >
+                Stocks Page
+              </Link>
+              <Link
+                to={"./dashboard/userspage"}
+                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              >
+                Users
+              </Link>
+              <Link
+                to={"./dashboard/incomingorders"}
+                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              >
+                Incoming Orders
+              </Link>
+              <Link
+                to={"./dashboard/outgoingorders"}
+                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              >
+                Outgoing Orders
+              </Link>
+            </>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           {checkState ? (
