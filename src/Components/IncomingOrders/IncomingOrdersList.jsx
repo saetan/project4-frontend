@@ -85,7 +85,10 @@ export default function IncomingOrdersList({
               <button
                 id={order._id}
                 onClick={() => {
-                  console.log(order.orderId);
+                  console.log(
+                    "Updating Order with the following SKU ID: " + order.skuID
+                  );
+                  handleApproved(order);
                 }}
               >
                 Recieved
@@ -97,6 +100,42 @@ export default function IncomingOrdersList({
     });
   }
 
+  const handleApproved = async (data) => {
+    try {
+      const updateStock = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/orders/incoming/approved/${data.skuID}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (updateStock.status === 200) {
+        const deleteResponse = await fetch(
+          `${process.env.REACT_APP_API_ENDPOINT}/orders/incoming/${data._id}`,
+          {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const deleteResponseMessage = await deleteResponse.json();
+        if (deleteResponseMessage.status === 200) {
+          await Swal.fire("Approved Success");
+          setTriggerRefresh(!triggerRefresh);
+        } else {
+          throw new Error(deleteResponseMessage.message);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const retrieveOrderList = async () => {
     try {
       const ordersResponse = await fetch(
