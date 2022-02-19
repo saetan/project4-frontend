@@ -187,8 +187,8 @@ export default function IncomingOrdersForms() {
     <>
       <div className="w-full max-w flex justify-center items-center h-full">
         <form className="bg-white shadow-md rounded-lg px-12 pt-2 mt-6 pb-6 mb-6">
-          <div class="mb-4 mt-4">
-            <div class="mb-4">
+          <div className="mb-4 mt-4">
+            <div className="mb-4">
               <label
                 className="block text-gray-700 text-lg font-bold mb-4"
                 for="orderId"
@@ -232,7 +232,7 @@ export default function IncomingOrdersForms() {
               order={order}
             />
           </div>
-          <div class="mb-4">
+          <div className="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
               for="stockName"
@@ -292,7 +292,7 @@ export default function IncomingOrdersForms() {
             )}
           </div>
 
-          <div class="mb-4">
+          <div className="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
               for="price"

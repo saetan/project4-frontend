@@ -19,6 +19,8 @@ export default function OutGoingOrdersForms() {
     orderId: false,
   });
 
+  const [isOverShot, setOverShot] = useState(false);
+
   const [selected, setSelected] = useState({
     _id: "empty",
     skuID: "",
@@ -126,10 +128,20 @@ export default function OutGoingOrdersForms() {
   };
 
   const handleQuantityChange = (event) => {
-    setOrder({
-      ...order,
-      quantity: event.currentTarget.value,
-    });
+    if (event.currentTarget.value > selected.quantity) {
+      setOverShot({
+        overShot: true,
+        message: `max number only ${selected.quantity}`,
+      });
+    } else {
+      setOverShot({
+        overShot: false,
+      });
+      setOrder({
+        ...order,
+        quantity: event.currentTarget.value,
+      });
+    }
   };
 
   const handleorderIdChange = (event) => {
@@ -276,9 +288,11 @@ export default function OutGoingOrdersForms() {
               onChange={handleQuantityChange}
               id="quantity"
               type="number"
-              placeholder="00.00"
-              min="0.00"
+              placeholder={`max: ${selected.quantity}`}
+              min="1"
+              max={selected.quantity}
               onBlur={checkIsEmpty}
+              disabled={!selected.skuID}
             />
             {!isEmpty.quantity ? (
               ""
@@ -286,6 +300,13 @@ export default function OutGoingOrdersForms() {
               <p className="text-red-500 text-md italic">
                 Please fill in the quantity
               </p>
+            )}
+            {isOverShot.overShot ? (
+              <p className="text-red-500 text-md italic">
+                {isOverShot.message}
+              </p>
+            ) : (
+              ""
             )}
           </div>
 
