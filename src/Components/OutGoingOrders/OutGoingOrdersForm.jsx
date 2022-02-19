@@ -39,6 +39,12 @@ export default function OutGoingOrdersForms() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (selected) {
+      setOrder({ ...order, stockName: selected.name, price: selected.price });
+    }
+  }, [selected]);
+
   const refreshForm = (event) => {
     setOrder({
       skuID: "",
@@ -219,6 +225,8 @@ export default function OutGoingOrdersForms() {
               stocks={stocks}
               selected={selected}
               setSelected={setSelected}
+              order={order}
+              setOrder={setOrder}
             />
           </div>
           <div className="mb-4">

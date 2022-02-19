@@ -149,6 +149,7 @@ export default function IncomingOrdersForms() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("uwu");
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_ENDPOINT}/orders/incoming`,

@@ -15,7 +15,7 @@ export default function AutoSearchBar({
     query === ""
       ? stocks
       : stocks.filter((stock) =>
-          stock.name
+          stock.skuID
             .toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
@@ -28,7 +28,7 @@ export default function AutoSearchBar({
           <div className="relative w-full text-left bg-white  py-4 px-6 text-gray-700 leading-tight rounded shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-teal-300 focus-visible:ring-offset-2 sm:text-sm overflow-hidden">
             <Combobox.Input
               className="w-full border-none focus:ring-0 py-2 pl-3 pr-10 text-sm leading-5 text-gray-900"
-              displayValue={(stock) => stock.name}
+              displayValue={(stock) => stock.skuID}
               onChange={(event) => setQuery(event.target.value)}
               onBlur={(event) => {
                 setOrder({ ...order, skuID: event.target.value });
@@ -70,7 +70,7 @@ export default function AutoSearchBar({
                             selected ? "font-medium" : "font-normal"
                           }`}
                         >
-                          {stock.name}
+                          {stock.skuID}
                         </span>
                         {selected ? (
                           <span
