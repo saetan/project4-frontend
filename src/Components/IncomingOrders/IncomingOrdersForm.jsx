@@ -117,13 +117,6 @@ export default function IncomingOrdersForms() {
     });
   };
 
-  const handleSKUIDChange = (event) => {
-    setOrder({
-      ...order,
-      skuID: event.currentTarget.value,
-    });
-  };
-
   const fetchData = async () => {
     try {
       const stocksDataResponse = await fetch(
@@ -278,7 +271,6 @@ export default function IncomingOrdersForms() {
               type="number"
               onChange={handleQuantityChange}
               id="quantity"
-              type="number"
               placeholder="00.00"
               min="0.00"
               onBlur={checkIsEmpty}

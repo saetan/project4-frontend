@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export default function OutgoingOrderEditPage(props) {
+export default function OutgoingOrderEditPage({
+  triggerRefresh,
+  setTriggerRefresh,
+}) {
   let { id } = useParams();
   const [orderData, setOrderData] = useState({});
   const [isDisabled, setDisabled] = useState(false);
@@ -13,8 +16,6 @@ export default function OutgoingOrderEditPage(props) {
     quantity: false,
     price: false,
   });
-
-  const { triggerRefresh, setTriggerRefresh } = props;
 
   useEffect(() => {
     console.log("UseEffect Called");
@@ -155,7 +156,7 @@ export default function OutgoingOrderEditPage(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const getResponse = await updateOrderData();
+      await updateOrderData();
     } catch (error) {
       console.log(error.message);
     }
@@ -238,7 +239,6 @@ export default function OutgoingOrderEditPage(props) {
               type="number"
               onChange={handleQuantityChange}
               id="quantity"
-              type="number"
               placeholder={orderData.quantity}
               min="0.00"
               onBlur={checkIsEmpty}

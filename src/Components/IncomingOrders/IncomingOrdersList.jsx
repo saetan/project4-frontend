@@ -59,12 +59,6 @@ export default function IncomingOrdersList({
     navigate(`/dashboard/incomingorder/edit/${event.currentTarget.id}`);
   };
 
-  const handleReceived = (event) => {
-    //increase stock
-    console.log(event.currentTarget.order.quantity);
-    //delete this entry
-  };
-
   if (orderList !== []) {
     maporder = orderList.map((order) => {
       return (

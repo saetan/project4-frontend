@@ -213,7 +213,6 @@ export default function AddStockForms(props) {
               type="number"
               onChange={handleQuantityChange}
               id="quantity"
-              type="number"
               placeholder="00.00"
               min="0.00"
               onBlur={checkIsEmpty}

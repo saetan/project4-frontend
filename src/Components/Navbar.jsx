@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 
 export default function Navbar(props) {
   let checkState = useSelector((state) => state.states.isLoggedIn);

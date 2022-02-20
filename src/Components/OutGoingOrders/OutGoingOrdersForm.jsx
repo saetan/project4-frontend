@@ -151,13 +151,6 @@ export default function OutGoingOrdersForms() {
     });
   };
 
-  const handleSKUIDChange = (event) => {
-    setOrder({
-      ...order,
-      skuID: event.currentTarget.value,
-    });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -287,7 +280,6 @@ export default function OutGoingOrdersForms() {
               type="number"
               onChange={handleQuantityChange}
               id="quantity"
-              type="number"
               placeholder={`max: ${selected.quantity}`}
               min="1"
               max={selected.quantity}

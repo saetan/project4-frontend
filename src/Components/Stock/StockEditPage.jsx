@@ -155,7 +155,7 @@ export default function StockEditPage(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const getResponse = await updateStockData();
+      await updateStockData();
     } catch (error) {
       console.log(error.message);
     }
@@ -238,7 +238,6 @@ export default function StockEditPage(props) {
               type="number"
               onChange={handleQuantityChange}
               id="quantity"
-              type="number"
               placeholder={stockData.quantity}
               min="0.00"
               onBlur={checkIsEmpty}

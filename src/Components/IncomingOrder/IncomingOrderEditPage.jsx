@@ -155,7 +155,7 @@ export default function IncomingOrderEditPage(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const getResponse = await updateOrderData();
+      await updateOrderData();
     } catch (error) {
       console.log(error.message);
     }
@@ -235,7 +235,6 @@ export default function IncomingOrderEditPage(props) {
                   : "shadow appearance-none border border-red-500 rounded w-full py-4 px-6 text-gray-700 mb-6 leading-tight focus:outline-none focus:shadow-outline"
               }
               value={orderData.quantity}
-              type="number"
               onChange={handleQuantityChange}
               id="quantity"
               type="number"

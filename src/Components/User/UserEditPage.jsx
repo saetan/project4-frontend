@@ -128,7 +128,7 @@ export default function UserEditPage(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const getResponse = await updateUserData();
+      await updateUserData();
     } catch (error) {
       console.log(error.message);
     }
@@ -222,6 +222,7 @@ export default function UserEditPage(props) {
           <div className="flex items-center justify-between">
             <button
               onClick={handleSubmit}
+              disabled={isDisabled}
               className="inline-block align-baseline font-bold text-2xl text-atoll hover:text-lightseagreen disabled: text-grey disabled: hover: text-grey"
             >
               Submit

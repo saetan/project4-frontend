@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { toast } from "react-toastify";
 import OverviewChart from "../Components/Overview/OverviewChart";
 import OverviewTable from "../Components/Overview/OverviewTable";
 
@@ -35,6 +36,25 @@ export default function OverviewPage() {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+
+  const checkStockLevel = () => {
+    if (stockList) {
+      for (let stock of stockList) {
+        console.log(stock);
+        if (stock.quantity <= 5) {
+          toast.warn(`${stock.name} is low in quantity, please order more`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      }
     }
   };
 
@@ -93,6 +113,10 @@ export default function OverviewPage() {
     retrieveStockList();
   }, []);
 
+  useEffect(() => {
+    checkStockLevel();
+  }, [stockList]);
+
   if (currentSortSelection === "category") {
     sortByCategory(generatedLabels, generatedData);
   } else if (currentSortSelection === "itemName") {
@@ -100,41 +124,42 @@ export default function OverviewPage() {
   } else if (currentSortSelection === "price") {
     sortByPrice(generatedLabels, generatedData);
   }
-
   return (
-    <div className="grid grid-cols-2 bg-oyesterbay w-screen h-screen">
-      <div className="flex items-center justify-center">
-        <div className="grid grid-cols-1">
-          <button
-            className="inline-block bg-atoll text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-            onClick={handleItemNameSort}
-          >
-            Sort By Item Names
-          </button>
-          <button
-            className="inline-block bg-toll text-sm px-4 py-2 bg-atoll leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-            onClick={handleCategorySort}
-          >
-            Sort By Category
-          </button>
-          <button
-            className="inline-block bg-toll text-sm px-4 py-2 bg-atoll leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-            onClick={handlePriceSort}
-          >
-            Sort By Price
-          </button>
+    <>
+      <div className="grid grid-cols-2 bg-oyesterbay w-screen h-screen">
+        <div className="flex items-center justify-center">
+          <div className="grid grid-cols-1">
+            <button
+              className="inline-block bg-atoll text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+              onClick={handleItemNameSort}
+            >
+              Sort By Item Names
+            </button>
+            <button
+              className="inline-block bg-toll text-sm px-4 py-2 bg-atoll leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+              onClick={handleCategorySort}
+            >
+              Sort By Category
+            </button>
+            <button
+              className="inline-block bg-toll text-sm px-4 py-2 bg-atoll leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+              onClick={handlePriceSort}
+            >
+              Sort By Price
+            </button>
+          </div>
+          <OverviewChart
+            generatedData={generatedData}
+            generatedLabels={generatedLabels}
+          />
         </div>
-        <OverviewChart
-          generatedData={generatedData}
-          generatedLabels={generatedLabels}
-        />
+        <div className="flex flex-col items-center justify-center">
+          <OverviewTable
+            generatedData={generatedData}
+            generatedLabels={generatedLabels}
+          />
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-center">
-        <OverviewTable
-          generatedData={generatedData}
-          generatedLabels={generatedLabels}
-        />
-      </div>
-    </div>
+    </>
   );
 }
