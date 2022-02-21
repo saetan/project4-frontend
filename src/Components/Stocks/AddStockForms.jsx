@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import CSVUpload from "../CSVUpload";
 
 export default function AddStockForms(props) {
   const [stock, setStock] = useState({

@@ -1,13 +1,16 @@
 export default function StockPageNavbar(props) {
   const { setToggleToAddStockPage } = props;
   const toggleAddStockPage = (event) => {
-    setToggleToAddStockPage(true);
+    setToggleToAddStockPage("addStock");
   };
   const toggleStockListPage = (event) => {
-    setToggleToAddStockPage(false);
+    setToggleToAddStockPage("stockList");
+  };
+  const toggleUploadCSV = (event) => {
+    setToggleToAddStockPage("uploadCSV");
   };
   return (
-    <nav className="flex flex-col  bg-atoll w-full items-center h-full">
+    <nav className="flex flex-col  bg-atoll w-full items-center h-full min-h-screen">
       <div>
         <span className="font-semibold text-2xl text-center text-azure">
           Stocks Page
@@ -25,6 +28,12 @@ export default function StockPageNavbar(props) {
           className="block mt-4 lg:inline-block lg:mt-0 text-blackpearl hover:text-lightseagreen"
         >
           Stock List
+        </button>
+        <button
+          onClick={toggleUploadCSV}
+          className="block mt-4 lg:inline-block lg:mt-0 text-blackpearl hover:text-lightseagreen"
+        >
+          UploadCSVFile
         </button>
       </div>
     </nav>
