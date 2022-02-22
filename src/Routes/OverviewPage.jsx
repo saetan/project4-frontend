@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import OverviewChart from "../Components/Overview/OverviewChart";
 import OverviewTable from "../Components/Overview/OverviewTable";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function OverviewPage() {
+  let isLoggedIn = useSelector((state) => state.states.isLoggedIn);
+  let navigate = useNavigate();
   const [stockList, setStockList] = useState();
   const [currentSortSelection, setCurrentSortSelection] = useState("category");
   let generatedLabels = [];
@@ -30,7 +35,14 @@ export default function OverviewPage() {
 
       //Set Stocklist if stock is not empty
       if (stocksData.status !== 200) {
-        console.log(stocksData.result);
+        if (stocksData.status === 401) {
+          await Swal.fire(stocksData.result);
+          if (isLoggedIn) {
+            navigate("/dashboard/overview");
+          } else {
+            navigate("/login");
+          }
+        }
       } else if (stocksData.status === 200) {
         setStockList(stocksData.data);
       }

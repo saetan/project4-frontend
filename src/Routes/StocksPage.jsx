@@ -5,14 +5,9 @@ import StockPageNavbar from "../Components/Stocks/StockPageNavBar";
 import CSVUploadPage from "../Components/Stocks/CSVUploadPage";
 
 export default function StocksPage() {
-  const [triggerRefresh, setTriggerRefresh] = useState(false);
   const [isAddStockPage, setToggleToAddStockPage] = useState("stockList");
   const [currentSelection, setCurrentSelection] = useState(
-    <StockList
-      triggerRefresh={triggerRefresh}
-      setTriggerRefresh={setTriggerRefresh}
-      setToggleToAddStockPage={setToggleToAddStockPage}
-    />
+    <StockList setToggleToAddStockPage={setToggleToAddStockPage} />
   );
 
   useEffect(() => {
@@ -22,22 +17,16 @@ export default function StocksPage() {
   const renderSelected = () => {
     if (isAddStockPage === "stockList") {
       setCurrentSelection(
-        <StockList
-          triggerRefresh={triggerRefresh}
-          setTriggerRefresh={setTriggerRefresh}
-          setToggleToAddStockPage={setToggleToAddStockPage}
-        />
+        <StockList setToggleToAddStockPage={setToggleToAddStockPage} />
       );
     } else if (isAddStockPage === "addStock") {
       setCurrentSelection(
-        <AddStockForms
-          setTriggerRefresh={setTriggerRefresh}
-          triggerRefresh={triggerRefresh}
-          setToggleToAddStockPage={setToggleToAddStockPage}
-        />
+        <AddStockForms setToggleToAddStockPage={setToggleToAddStockPage} />
       );
     } else if (isAddStockPage === "uploadCSV") {
-      setCurrentSelection(<CSVUploadPage />);
+      setCurrentSelection(
+        <CSVUploadPage setToggleToAddStockPage={setToggleToAddStockPage} />
+      );
     }
   };
 
@@ -46,22 +35,7 @@ export default function StocksPage() {
       <div className="w-64">
         <StockPageNavbar setToggleToAddStockPage={setToggleToAddStockPage} />
       </div>
-      <div className="w-full">
-        {/* {isAddStockPage === "addStock" ? (
-          <AddStockForms
-            setTriggerRefresh={setTriggerRefresh}
-            triggerRefresh={triggerRefresh}
-            setToggleToAddStockPage={setToggleToAddStockPage}
-          />
-        ) : (
-          <StockList
-            triggerRefresh={triggerRefresh}
-            setTriggerRefresh={setTriggerRefresh}
-            setToggleToAddStockPage={setToggleToAddStockPage}
-          />
-        )} */}
-        {currentSelection}
-      </div>
+      <div className="w-full">{currentSelection}</div>
     </div>
   );
 }

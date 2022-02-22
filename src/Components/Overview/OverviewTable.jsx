@@ -3,8 +3,14 @@ export default function OverviewTable({ generatedData, generatedLabels }) {
   let tableData;
 
   if (generatedLabels !== []) {
+    let count = 0; // for making unique key to make react happy
     tableHeader = generatedLabels.map((label) => {
-      return <th className="border broder-blackpearl">{label}</th>;
+      count += 1;
+      return (
+        <th key={`${label}${count}`} className="border broder-blackpearl">
+          {label}
+        </th>
+      );
     });
   }
 

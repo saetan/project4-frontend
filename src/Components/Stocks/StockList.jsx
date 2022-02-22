@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-export default function StocksList({ triggerRefresh, setTriggerRefresh }) {
+export default function StocksList() {
   const [stockList, setStockList] = useState([]);
+  const [selfRefresh, setSelfRefresh] = useState(false);
+  let isLoggedIn = useSelector((state) => state.states.isLoggedIn);
   let navigate = useNavigate();
 
   let mapStock;
 
   useEffect(() => {
     retrieveStockList();
-  }, [triggerRefresh]);
+  }, [selfRefresh]);
 
   const handleDelete = async (event) => {
     console.log(event.currentTarget.id);
@@ -42,7 +45,8 @@ export default function StocksList({ triggerRefresh, setTriggerRefresh }) {
         const deleteResponseMessage = await deleteResponse.json();
         if (deleteResponseMessage.status === 200) {
           await Swal.fire(deleteResponseMessage.message);
-          setTriggerRefresh(!triggerRefresh);
+          console.log("trigger refresh");
+          setSelfRefresh((prevState) => !prevState);
         } else {
           throw new Error(deleteResponseMessage.message);
         }
@@ -99,7 +103,11 @@ export default function StocksList({ triggerRefresh, setTriggerRefresh }) {
       if (stocksData.status !== 200) {
         if (stocksData.status === 401) {
           await Swal.fire(stocksData.result);
-          navigate("/dashboard/overview");
+          if (isLoggedIn) {
+            navigate("/dashboard/overview");
+          } else {
+            navigate("/login");
+          }
         }
       } else if (stocksData.status === 200) {
         setStockList(stocksData.data);

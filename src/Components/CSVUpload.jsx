@@ -65,12 +65,7 @@ const styles = {
     paddingLeft: 10,
     paddingRight: 10,
   },
-  zoneHover: {
-    borderColor: GREY_DIM,
-  },
-  default: {
-    borderColor: GREY,
-  },
+
   remove: {
     height: 23,
     position: "absolute",
@@ -80,7 +75,7 @@ const styles = {
   },
 };
 
-export default function CSVUpload() {
+export default function CSVUpload({ setCSVData }) {
   const { jsonToCSV } = usePapaParse();
   const { CSVReader } = useCSVReader();
   const [zoneHover, setZoneHover] = useState(false);
@@ -90,9 +85,11 @@ export default function CSVUpload() {
 
   return (
     <CSVReader
+      config={{ header: true }}
       onUploadAccepted={(results) => {
         console.log("---------------------------");
         console.log(results);
+        setCSVData(results.data);
         console.log("---------------------------");
         setZoneHover(false);
       }}
