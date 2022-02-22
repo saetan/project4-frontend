@@ -72,17 +72,20 @@ export default function OverviewPage() {
 
   const sortByCategory = (labels, data) => {
     let categoryCount = {};
+    let labelCount = {};
+
     if (stockList) {
       for (let stock of stockList) {
-        if (stock) {
+        if (!labelCount[stock.category]) {
           labels.push(stock.category);
-          if (categoryCount[stock.category]) {
-            categoryCount[stock.category] += 1;
-          } else {
-            categoryCount[stock.category] = 1;
-          }
+          labelCount[stock.category] = 1;
+        } else {
+          labelCount[stock.category] += 1;
         }
-        data.push(categoryCount[stock.category]);
+      }
+
+      for (let stockCount in labelCount) {
+        data.push(labelCount[stockCount]);
       }
     }
   };
@@ -99,12 +102,18 @@ export default function OverviewPage() {
   };
 
   const sortByPrice = (labels, data) => {
+    let categoryCount = {};
     if (stockList) {
       for (let stock of stockList) {
         if (stock) {
-          labels.push(stock.name);
-          data.push(stock.price);
+          labels.push(stock.price);
+          if (categoryCount[stock.price]) {
+            categoryCount[stock.price] += 1;
+          } else {
+            categoryCount[stock.price] = 1;
+          }
         }
+        data.push(categoryCount[stock.price]);
       }
     }
   };

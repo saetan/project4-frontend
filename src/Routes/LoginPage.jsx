@@ -65,7 +65,7 @@ export default function LoginPage() {
         Swal.fire("Login Successful");
         dispatch(toggleLoginState({ isLoggedIn: true }));
         dispatch(updateRole({ role: decodedResponse.role }));
-        navigate("/dashboard");
+        navigate("/dashboard/overview");
       }
     } catch (error) {
       console.warn(error.message);

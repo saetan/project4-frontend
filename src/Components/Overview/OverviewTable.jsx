@@ -25,7 +25,7 @@ export default function OverviewTable({ generatedData, generatedLabels }) {
   }
 
   return (
-    <div className="flex justify-center items-center font-bold text-xl w-full min-h-full">
+    <div className="flex font-bold text-xl w-full min-h-full overflow-auto">
       {tableHeader === [] ? (
         "noData"
       ) : (
