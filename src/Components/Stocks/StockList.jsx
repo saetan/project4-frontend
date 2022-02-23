@@ -118,7 +118,7 @@ export default function StocksList() {
   };
 
   return (
-    <div className="flex justify-center items-center font-bold text-xl h-screen">
+    <div className="flex justify-center items-center font-bold text-xl h-full">
       {stockList.length ? (
         <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
           <thead className="bg-lightseagreen">
