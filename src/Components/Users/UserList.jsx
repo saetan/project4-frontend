@@ -56,17 +56,36 @@ export default function UserList({ triggerRefresh, setTriggerRefresh }) {
   if (userList !== []) {
     mapUsers = userList.map((user) => {
       return (
-        <tr key={user.username}>
-          <td className="border border-blackpearl">{user.username}</td>
-          <td className="border border-blackpearl">{user.password}</td>
-          <td className="border border-blackpearl">{user.email}</td>
-          <td className="border border-blackpearl">{user.type}</td>
-          <td className="border border-blackpearl">
+        <tr
+          key={user.username}
+          className="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600"
+        >
+          <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {user.username}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {user.password}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {user.email}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {user.type}
+          </td>
+          <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
             <div className="flex flex-col">
-              <button id={user._id} onClick={handleEdit}>
+              <button
+                className="text-blue-600 dark:text-blue-500 hover:underline"
+                id={user._id}
+                onClick={handleEdit}
+              >
                 Edit
               </button>
-              <button id={user._id} onClick={handleDelete}>
+              <button
+                className="text-blue-600 dark:text-blue-500 hover:underline"
+                id={user._id}
+                onClick={handleDelete}
+              >
                 Delete
               </button>
             </div>
@@ -103,23 +122,37 @@ export default function UserList({ triggerRefresh, setTriggerRefresh }) {
   };
 
   return (
-    <div className="flex justify-center items-center font-bold text-xl">
-      {userList.length ? (
-        <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
-          <thead className="bg-lightseagreen">
-            <tr className="text-azure">
-              <th className="border border-blackpearl">Username</th>
-              <th className="border border-blackpearl">Password</th>
-              <th className="border border-blackpearl">Email</th>
-              <th className="border border-blackpearl">Type</th>
-              <th className="border border-blackpearl">Actions</th>
-            </tr>
-          </thead>
-          <tbody>{mapUsers}</tbody>
-        </table>
-      ) : (
-        "No Userlist"
-      )}
+    <div className="flex flex-col">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden shadow-md sm:rounded-lg lg:mt-20">
+            {userList.length ? (
+              <table className="bg-azure min-w-full">
+                <thead className="bg-lightseagreen">
+                  <tr className="text-azure">
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Username
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Password
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Email
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Type
+                    </th>
+                    <th className="relative py-3 px-6">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>{mapUsers}</tbody>
+              </table>
+            ) : (
+              "No Userlist"
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

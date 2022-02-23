@@ -62,21 +62,43 @@ export default function IncomingOrdersList({
   if (orderList !== []) {
     maporder = orderList.map((order) => {
       return (
-        <tr key={order.orderId}>
-          <td className="border border-blackpearl">{order.orderId}</td>
-          <td className="border border-blackpearl">{order.skuID}</td>
-          <td className="border border-blackpearl">{order.stockName}</td>
-          <td className="border border-blackpearl">{order.price}</td>
-          <td className="border border-blackpearl">{order.quantity}</td>
-          <td className="border border-blackpearl">
+        <tr
+          key={order.orderId}
+          className="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600"
+        >
+          <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {order.orderId}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {order.skuID}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {order.stockName}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {order.price}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {order.quantity}
+          </td>
+          <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
             <div className="flex flex-col">
-              <button id={order._id} onClick={handleEdit}>
+              <button
+                className="text-blue-600 dark:text-blue-500 hover:underline"
+                id={order._id}
+                onClick={handleEdit}
+              >
                 Edit
               </button>
-              <button id={order._id} onClick={handleDelete}>
+              <button
+                className="text-blue-600 dark:text-blue-500 hover:underline"
+                id={order._id}
+                onClick={handleDelete}
+              >
                 Delete
               </button>
               <button
+                className="text-blue-600 dark:text-blue-500 hover:underline"
                 id={order._id}
                 onClick={() => {
                   console.log(
@@ -157,24 +179,40 @@ export default function IncomingOrdersList({
   };
 
   return (
-    <div className="flex justify-center items-center font-bold text-xl h-screen">
-      {orderList.length ? (
-        <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
-          <thead className="bg-lightseagreen">
-            <tr className="text-azure">
-              <th className="border border-blackpearl">Order ID</th>
-              <th className="border border-blackpearl">SKU</th>
-              <th className="border border-blackpearl">order Name</th>
-              <th className="border border-blackpearl">Price</th>
-              <th className="border border-blackpearl">Quantity</th>
-              <th className="border border-blackpearl">Action</th>
-            </tr>
-          </thead>
-          <tbody>{maporder}</tbody>
-        </table>
-      ) : (
-        "No orders"
-      )}
+    <div className="flex flex-col">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden shadow-md sm:rounded-lg lg:mt-20">
+            {orderList.length ? (
+              <table className="bg-azure min-w-full">
+                <thead className="bg-lightseagreen">
+                  <tr className="text-azure">
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Order ID
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      SKU
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      order Name
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Price
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Quantity
+                    </th>
+                    <th className="relative py-3 px-6">Action</th>
+                  </tr>
+                </thead>
+                <tbody>{maporder}</tbody>
+              </table>
+            ) : (
+              "No orders"
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
