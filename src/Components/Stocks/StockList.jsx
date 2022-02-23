@@ -63,18 +63,39 @@ export default function StocksList() {
   if (stockList !== []) {
     mapStock = stockList.map((stock) => {
       return (
-        <tr key={stock.skuID}>
-          <td className="border border-blackpearl">{stock.skuID}</td>
-          <td className="border border-blackpearl">{stock.name}</td>
-          <td className="border border-blackpearl">{stock.price}</td>
-          <td className="border border-blackpearl">{stock.quantity}</td>
-          <td className="border border-blackpearl">{stock.category}</td>
-          <td className="border border-blackpearl">
+        <tr
+          key={stock.skuID}
+          className="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600"
+        >
+          <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {stock.skuID}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {stock.name}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {stock.price}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {stock.quantity}
+          </td>
+          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+            {stock.category}
+          </td>
+          <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
             <div className="flex flex-col">
-              <button id={stock._id} onClick={handleEdit}>
+              <button
+                className="text-blue-600 dark:text-blue-500 hover:underline"
+                id={stock._id}
+                onClick={handleEdit}
+              >
                 Edit
               </button>
-              <button id={stock._id} onClick={handleDelete}>
+              <button
+                className="text-blue-600 dark:text-blue-500 hover:underline"
+                id={stock._id}
+                onClick={handleDelete}
+              >
                 Delete
               </button>
             </div>
@@ -118,24 +139,40 @@ export default function StocksList() {
   };
 
   return (
-    <div className="flex justify-center items-center font-bold text-xl h-full">
-      {stockList.length ? (
-        <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
-          <thead className="bg-lightseagreen">
-            <tr className="text-azure">
-              <th className="border border-blackpearl">SKU</th>
-              <th className="border border-blackpearl">Name</th>
-              <th className="border border-blackpearl">Price</th>
-              <th className="border border-blackpearl">Quantity</th>
-              <th className="border border-blackpearl">Category</th>
-              <th className="border border-blackpearl">Action</th>
-            </tr>
-          </thead>
-          <tbody>{mapStock}</tbody>
-        </table>
-      ) : (
-        "No stocks"
-      )}
+    <div className="flex flex-col">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden shadow-md sm:rounded-lg lg:mt-20">
+            {stockList.length ? (
+              <table className="bg-azure min-w-full">
+                <thead className="bg-lightseagreen">
+                  <tr>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      SKU
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Name
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Price
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Quantity
+                    </th>
+                    <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                      Category
+                    </th>
+                    <th className="relative py-3 px-6">Action</th>
+                  </tr>
+                </thead>
+                <tbody>{mapStock}</tbody>
+              </table>
+            ) : (
+              "No stocks"
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
