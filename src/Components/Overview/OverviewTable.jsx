@@ -7,7 +7,10 @@ export default function OverviewTable({ generatedData, generatedLabels }) {
     tableHeader = generatedLabels.map((label) => {
       count += 1;
       return (
-        <th key={`${label}${count}`} className="border broder-blackpearl">
+        <th
+          key={`${label}${count}`}
+          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+        >
           {label}
         </th>
       );
@@ -17,7 +20,10 @@ export default function OverviewTable({ generatedData, generatedLabels }) {
   if (generatedData !== []) {
     tableData = generatedData.map((data) => {
       return (
-        <td key={data._id} className="border border-blackpearl">
+        <td
+          key={data._id}
+          className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
           {data}
         </td>
       );
@@ -25,19 +31,27 @@ export default function OverviewTable({ generatedData, generatedLabels }) {
   }
 
   return (
-    <div className="flex font-bold text-xl w-full min-h-full overflow-auto">
-      {tableHeader === [] ? (
-        "noData"
-      ) : (
-        <table className="bg-azure border-collapse border border-blackpearl table-fixed  min-w-full min-h-screen">
-          <thead className="bg-lightseagreen">
-            <tr className="text-azure">{tableHeader}</tr>
-          </thead>
-          <tbody>
-            <tr>{tableData}</tr>
-          </tbody>
-        </table>
-      )}
+    <div className="flex flex-col">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden shadow-md sm:rounded-lg">
+            {tableHeader === [] ? (
+              "noData"
+            ) : (
+              <table className="bg-azure min-w-full">
+                <thead className="bg-lightseagreen">
+                  <tr>{tableHeader}</tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600">
+                    {tableData}
+                  </tr>
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
