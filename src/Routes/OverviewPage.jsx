@@ -106,7 +106,7 @@ export default function OverviewPage() {
     if (stockList) {
       for (let stock of stockList) {
         if (stock) {
-          labels.push(stock.price);
+          labels.push(`$${stock.price}`);
           if (categoryCount[stock.price]) {
             categoryCount[stock.price] += 1;
           } else {

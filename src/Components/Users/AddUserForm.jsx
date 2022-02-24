@@ -113,7 +113,7 @@ export default function AddUserForm(props) {
           <div className="mt-2">
             <label
               className="block text-gray-700 text-xl font-bold mb-4"
-              for="username"
+              htmlFor="username"
             >
               username
             </label>
@@ -126,10 +126,10 @@ export default function AddUserForm(props) {
               onChange={handleUserNameChange}
             />
           </div>
-          <div class="mb-8">
+          <div className="mb-8">
             <label
               className="block text-gray-700 text-xl font-bold mb-8"
-              for="email"
+              htmlFor="email"
             >
               email
             </label>
@@ -155,7 +155,7 @@ export default function AddUserForm(props) {
           <div className="mb-8">
             <label
               className="block text-gray-700 text-xl font-bold mb-4"
-              for="type"
+              htmlFor="type"
             >
               Type
             </label>
@@ -177,7 +177,7 @@ export default function AddUserForm(props) {
           <div class="mb-16">
             <label
               className="block text-gray-700 text-xl font-bold mb-4"
-              for="password"
+              htmlFor="password"
             >
               Password
             </label>

@@ -141,7 +141,7 @@ export default function UserEditPage(props) {
           <div class="mb-8">
             <label
               className="block text-gray-700 text-2xl font-bold mb-8"
-              for="username"
+              htmlFor="username"
             >
               username
             </label>
@@ -157,7 +157,7 @@ export default function UserEditPage(props) {
           <div class="mb-8">
             <label
               className="block text-gray-700 text-2xl font-bold mb-8"
-              for="email"
+              htmlFor="email"
             >
               email
             </label>
@@ -183,7 +183,7 @@ export default function UserEditPage(props) {
           <div className="mb-8">
             <label
               className="block text-gray-700 text-2xl font-bold mb-8"
-              for="type"
+              htmlFor="type"
             >
               Type
             </label>
@@ -202,10 +202,10 @@ export default function UserEditPage(props) {
             </select>
           </div>
 
-          <div class="mb-8">
+          <div className="mb-8">
             <label
               className="block text-gray-700 text-2xl font-bold mb-8"
-              for="password"
+              htmlFor="password"
             >
               Password
             </label>
