@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function UserList({ triggerRefresh, setTriggerRefresh }) {
   const [userList, setUserList] = useState([]);
   let mapUsers;
+  let isLoggedIn = useSelector((state) => state.states.isLoggedIn);
   let navigate = useNavigate();
   useEffect(() => {
     retrieveUserList();
@@ -112,7 +114,14 @@ export default function UserList({ triggerRefresh, setTriggerRefresh }) {
 
       //Set UserList if user is not empty
       if (usersData.status !== 200) {
-        console.log(usersData.result);
+        if (usersData.status === 401) {
+          await Swal.fire(usersData.result);
+          if (isLoggedIn) {
+            navigate("/dashboard/overview");
+          } else {
+            navigate("/login");
+          }
+        }
       } else if (usersData.status === 200) {
         setUserList(usersData.data);
       }
