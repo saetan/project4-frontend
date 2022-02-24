@@ -197,8 +197,8 @@ export default function UserEditPage(props) {
             >
               <option value="admin">admin</option>
               <option value="employee">employee</option>
-              <option value="employee">customer</option>
-              <option value="employee">supplier</option>
+              <option value="customer">customer</option>
+              <option value="supplier">supplier</option>
             </select>
           </div>
 

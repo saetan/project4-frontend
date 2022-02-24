@@ -4,6 +4,109 @@ import { useSelector } from "react-redux";
 export default function Navbar(props) {
   let checkState = useSelector((state) => state.states.isLoggedIn);
   let currentRole = useSelector((state) => state.states.role);
+  let roleView;
+
+  let adminView = (
+    <>
+      <Link
+        to={"./dashboard/overview"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Overview
+      </Link>
+      <Link
+        to={"./dashboard/stockspage"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Stocks Page
+      </Link>
+      <Link
+        to={"./dashboard/userspage"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Users
+      </Link>
+      <Link
+        to={"./dashboard/incomingorders"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Incoming Orders
+      </Link>
+      <Link
+        to={"./dashboard/outgoingorders"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Outgoing Orders
+      </Link>
+    </>
+  );
+
+  let employeeView = (
+    <>
+      <Link
+        to={"./dashboard/overview"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Overview
+      </Link>
+      <Link
+        to={"./dashboard/stockspage"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Stocks Page
+      </Link>
+
+      <Link
+        to={"./dashboard/incomingorders"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Incoming Orders
+      </Link>
+      <Link
+        to={"./dashboard/outgoingorders"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Outgoing Orders
+      </Link>
+    </>
+  );
+
+  let supplierView = (
+    <>
+      <Link
+        to={"./dashboard/incomingorders"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Incoming Orders
+      </Link>
+    </>
+  );
+
+  let customerView = (
+    <>
+      <Link
+        to={"./dashboard/outgoingorders"}
+        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      >
+        Outgoing Orders
+      </Link>
+    </>
+  );
+
+  if (currentRole === "admin") {
+    console.log("setting nav to admin");
+    roleView = adminView;
+  } else if (currentRole === "employee") {
+    console.log("setting nav to employee");
+    roleView = employeeView;
+  } else if (currentRole === "supplier") {
+    roleView = supplierView;
+    console.log("setting nav to supplierView");
+  } else if (currentRole === "customer") {
+    console.log("setting nav to customerView");
+    roleView = customerView;
+  }
+
   return (
     <nav className="flex items-center justify-between flex-wrap p-6 bg-lightseagreen min-w-full w-screen">
       <div className="flex items-center flex-shrink-0 text-azure mr-6">
@@ -33,44 +136,7 @@ export default function Navbar(props) {
         </button>
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
-          {checkState ? (
-            <>
-              <Link
-                to={"./dashboard/overview"}
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Overview
-              </Link>
-              <Link
-                to={"./dashboard/stockspage"}
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Stocks Page
-              </Link>
-              <Link
-                to={"./dashboard/userspage"}
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Users
-              </Link>
-              <Link
-                to={"./dashboard/incomingorders"}
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Incoming Orders
-              </Link>
-              <Link
-                to={"./dashboard/outgoingorders"}
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Outgoing Orders
-              </Link>
-            </>
-          ) : (
-            ""
-          )}
-        </div>
+        <div className="text-sm lg:flex-grow">{checkState ? roleView : ""}</div>
         <div>
           {checkState ? (
             <Link
