@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
+
 export default function OutGoingOrdersPageNavBar({
   setToggleOutGoingOrdersForm,
 }) {
+  let currentRole = useSelector((state) => state.states.role);
+
   const toggleOutGoingOrdersPage = (event) => {
     setToggleOutGoingOrdersForm(true);
   };
@@ -22,12 +26,16 @@ export default function OutGoingOrdersPageNavBar({
         >
           Create Outgoing Order
         </button>
-        <button
-          onClick={toggleOrderListPage}
-          className="block mt-4 lg:inline-block lg:mt-0 text-blackpearl hover:text-lightseagreen"
-        >
-          Outgoing Orders List
-        </button>
+        {currentRole === "customer" ? (
+          ""
+        ) : (
+          <button
+            onClick={toggleOrderListPage}
+            className="block mt-4 lg:inline-block lg:mt-0 text-blackpearl hover:text-lightseagreen"
+          >
+            Outgoing Orders List
+          </button>
+        )}
       </div>
     </nav>
   );

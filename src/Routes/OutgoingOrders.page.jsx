@@ -6,7 +6,6 @@ import OutGoingOrdersForm from "../Components/OutGoingOrders/OutGoingOrdersForm"
 export default function OutGoingOrdersPage() {
   const [triggerRefresh, setTriggerRefresh] = useState(false);
   const [isOutGoingOrdersForm, setToggleOutGoingOrdersForm] = useState(false);
-
   return (
     <div className="flex bg-oyesterbay">
       <div className="w-64">
