@@ -162,7 +162,9 @@ export default function StocksList() {
                     <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                       Category
                     </th>
-                    <th className="relative py-3 px-6">Action</th>
+                    <th className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>{mapStock}</tbody>
