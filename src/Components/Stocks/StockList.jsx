@@ -170,7 +170,7 @@ export default function StocksList() {
                 <tbody>{mapStock}</tbody>
               </table>
             ) : (
-              "No stocks"
+              "Loading"
             )}
           </div>
         </div>

@@ -16,6 +16,7 @@ import IncomingOrdersPage from "./Routes/IncomingOrdersPage";
 import OutGoingOrdersPage from "./Routes/OutgoingOrders.page";
 import IncomingOrderPage from "./Routes/IncomingOrderPage";
 import OutgoingOrderPage from "./Routes/OutgoingOrderPage";
+import ErrorPage from "./Routes/ErrorPage";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -44,14 +45,7 @@ ReactDOM.render(
                 element={<OutgoingOrderPage />}
               />
             </Route>
-            <Route
-              path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

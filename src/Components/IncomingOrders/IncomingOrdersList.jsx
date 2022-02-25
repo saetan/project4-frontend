@@ -81,7 +81,7 @@ export default function IncomingOrdersList({
           <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
             {order.quantity}
           </td>
-          <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+          <td className="py-4 px-6 text-sm font-medium lg:text-right whitespace-nowrap">
             <div className="flex flex-col">
               <button
                 className="text-blue-600 dark:text-blue-500 hover:underline"
@@ -202,7 +202,9 @@ export default function IncomingOrdersList({
                     <th className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                       Quantity
                     </th>
-                    <th className="relative py-3 px-6">Action</th>
+                    <th className="lg:relative py-3 px-6 lg:overflow-hidden">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>{maporder}</tbody>

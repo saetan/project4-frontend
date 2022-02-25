@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toggleLoginState, updateRole } from "../redux/stateSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function LoginPage() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
+
+  let checkState = useSelector((state) => state.states.isLoggedIn);
+  let currentRole = useSelector((state) => state.states.role);
 
   const [login, setLogin] = useState({
     email: "",
@@ -18,6 +21,27 @@ export default function LoginPage() {
     password: false,
   });
 
+  const checkisLoggedIn = () => {
+    console.log(checkState);
+    if (checkState) {
+      switch (currentRole) {
+        case "admin":
+          navigate("/dashboard/overview");
+          break;
+        case "employee":
+          navigate("/dashboard/overview");
+          break;
+        case "supplier":
+          navigate("/dashboard/incomingorders");
+          break;
+        case "customer":
+          navigate("/dashboard/outgoingorders");
+          break;
+        default:
+          navigate("/dashboard/login");
+      }
+    }
+  };
   const checkisEmpty = (event) => {
     let newEmpty = { ...isEmpty };
     if (event.currentTarget.value) {
@@ -92,6 +116,9 @@ export default function LoginPage() {
       });
     }
   };
+  useEffect(() => {
+    checkisLoggedIn();
+  }, [checkState, currentRole]);
 
   return (
     <>
