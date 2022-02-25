@@ -109,7 +109,7 @@ export default function Navbar(props) {
   }
 
   return (
-    <nav className="flex items-center justify-between flex-wrap p-6 bg-lightseagreen min-w-full w-screen">
+    <nav className="flex items-center justify-between flex-wrap p-6 bg-lightseagreen w-full">
       <div className="flex items-center flex-shrink-0 text-azure mr-6">
         <svg
           className="fill-current h-8 w-8 mr-2"
