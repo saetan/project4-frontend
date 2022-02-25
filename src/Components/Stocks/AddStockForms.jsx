@@ -143,7 +143,7 @@ export default function AddStockForms() {
           <div class="mb-4 mt-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
-              for="skuid"
+              htmlFor="skuid"
             >
               SKU ID
             </label>
@@ -171,7 +171,7 @@ export default function AddStockForms() {
           <div class="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
-              for="stockName"
+              htmlFor="stockName"
             >
               Stock Name
             </label>
@@ -199,7 +199,7 @@ export default function AddStockForms() {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
-              for="quantity"
+              htmlFor="quantity"
             >
               Stock Quantity
             </label>
@@ -229,7 +229,7 @@ export default function AddStockForms() {
           <div class="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
-              for="price"
+              htmlFor="price"
             >
               Price
             </label>
@@ -258,7 +258,7 @@ export default function AddStockForms() {
           <div class="mb-4">
             <label
               className="block text-gray-700 text-lg font-bold mb-4"
-              for="price"
+              htmlFor="price"
             >
               Category
             </label>

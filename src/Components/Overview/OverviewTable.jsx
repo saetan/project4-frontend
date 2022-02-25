@@ -18,10 +18,12 @@ export default function OverviewTable({ generatedData, generatedLabels }) {
   }
 
   if (generatedData !== []) {
+    let temp = 0;
     tableData = generatedData.map((data) => {
+      temp++;
       return (
         <td
-          key={data._id}
+          key={`${data} ${temp} `}
           className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
           {data}
