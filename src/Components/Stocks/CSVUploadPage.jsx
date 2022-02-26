@@ -21,16 +21,22 @@ export default function CSVUploadPage({ setToggleToAddStockPage }) {
             body: JSON.stringify(csvData),
           }
         );
+        console.log("response: " + response.status);
+        if (response.status === 401) {
+          const errorMessage = await response.text();
+          console.log(errorMessage);
+          throw new Error(errorMessage);
+        }
         const result = await response.json();
         if (result.result === 200) {
           console.log(result.message);
+
+          console.log(result.message);
           await Swal.fire(result.message);
           setToggleToAddStockPage("stockList");
-        } else {
-          throw new Error(result.message);
         }
       } catch (error) {
-        console.log(error.message);
+        Swal.fire(error.message + " please remove");
       }
     }
   };
